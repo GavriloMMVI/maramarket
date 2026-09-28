@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+<title>MARA MARKET — Your campus. Your marketplace. | MMU</title>
+<meta name="description" content="Mara Market is the student-only marketplace for Maasai Mara University. Buy. Sell. Discover. Right on campus."/>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        mara: {50:'#eef7f2',100:'#d6ecdf',200:'#aed9c1',300:'#7ebfa0',400:'#3da67d',500:'#14865f',600:'#0e6b4c',700:'#0b3b2e',800:'#0a2e22',900:'#071f17',950:'#04120e'},
+        ember: {50:'#fff1eb',100:'#ffded1',400:'#ff6b35',500:'#ff4d24',600:'#e63e15',700:'#c23110'},
+        gold: {300:'#ffda6b',400:'#ffc531',500:'#f5a800'},
+        cream: '#FFF8EF',
+        ink: '#0F1E19'
+      },
+      fontFamily: { sora:['Sora','sans-serif'], jakarta:['Plus Jakarta Sans','sans-serif'] },
+      boxShadow: { card:'0 8px 30px -8px rgba(11,59,46,.15)', pop:'0 20px 60px -12px rgba(11,59,46,.30)', glow:'0 0 0 4px rgba(255,77,36,.15)' }
+    }
+  }
+}
+</script>
+<style>
+*{ -webkit-tap-highlight-color:transparent; }
+html{ scroll-behavior:smooth; }
+body{ font-family:'Plus Jakarta Sans',sans-serif; background:#FAF8F4; color:#0F1E19; overflow-x:hidden; }
+.font-sora{ font-family:'Sora',sans-serif; }
+::-webkit-scrollbar{ width:8px; height:8px; }
+::-webkit-scrollbar-track{ background:#f1ede6; }
+::-webkit-scrollbar-thumb{ background:#0b3b2e; border-radius:99px; }
+.shuka{ background-image: repeating-linear-gradient(0deg, transparent 0 18px, rgba(255,255,255,.08) 18px 20px), repeating-linear-gradient(90deg, transparent 0 18px, rgba(255,255,255,.08) 18px 20px), linear-gradient(135deg,#0a2e22 0%, #0b3b2e 55%, #0e6b4c 100%); }
+.grain::after{ content:''; position:absolute; inset:0; pointer-events:none; opacity:.18; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E"); }
+.hero-blob{ position:absolute; border-radius:9999px; filter:blur(70px); opacity:.55; animation:float 8s ease-in-out infinite; }
+@keyframes float{ 0%,100%{ transform:translateY(0) scale(1);} 50%{ transform:translateY(-18px) scale(1.05);} }
+@keyframes marquee{ from{ transform:translateX(0);} to{ transform:translateX(-50%);} }
+.marquee-track{ animation:marquee 22s linear infinite; }
+.card-hover{ transition:all .35s cubic-bezier(.22,1,.36,1); }
+.card-hover:hover{ transform:translateY(-6px); box-shadow:0 20px 45px -12px rgba(11,59,46,.28); }
+.card-hover:hover .p-img{ transform:scale(1.07); }
+.p-img{ transition:transform .6s cubic-bezier(.22,1,.36,1); }
+.fav-btn{ transition:all .25s; }
+.fav-btn.active{ background:#ff4d24 !important; color:#fff !important; border-color:#ff4d24 !important; transform:scale(1.05); }
+.fav-btn.active i{ animation:pop .35s; }
+@keyframes pop{ 0%{transform:scale(.5)} 60%{transform:scale(1.3)} 100%{transform:scale(1)} }
+.chip{ transition:all .25s; }
+.chip.active{ background:#0b3b2e !important; color:#fff !important; border-color:#0b3b2e !important; }
+.no-scrollbar::-webkit-scrollbar{ display:none; }
+.no-scrollbar{ scrollbar-width:none; }
+.modal-bg{ background:rgba(7,31,23,.65); backdrop-filter:blur(8px); }
+.step-dot{ transition:all .3s; }
+input:focus, textarea:focus, select:focus{ outline:none; border-color:#0e6b4c !important; box-shadow:0 0 0 4px rgba(20,134,95,.12); }
+.toast-in{ animation:toastIn .4s cubic-bezier(.22,1,.36,1); }
+@keyframes toastIn{ from{ transform:translateY(20px) scale(.95); opacity:0;} to{ transform:translateY(0) scale(1); opacity:1;} }
+.bottom-nav{ padding-bottom:env(safe-area-inset-bottom); }
+.skeleton{ background:linear-gradient(90deg,#eee 25%,#e2e2e2 50%,#eee 75%); background-size:200% 100%; animation:shim 1.2s infinite; }
+@keyframes shim{ to{ background-position:-200% 0; } }
+.tab-active{ background:#0b3b2e; color:#fff; }
+.glass{ background:rgba(255,255,255,.85); backdrop-filter:blur(16px); }
+.line-clamp-1{ display:-webkit-box; -webkit-line-clamp:1; -webkit-box-orient:vertical; overflow:hidden; }
+.line-clamp-2{ display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+.chat-bubble-me{ background:#0b3b2e; color:#fff; border-radius:18px 18px 4px 18px; }
+.chat-bubble-them{ background:#fff; border:1px solid #ece6da; border-radius:18px 18px 18px 4px; }
+.verified-tick{ background:#14865f; color:#fff; }
+.price-tag{ font-variant-numeric:tabular-nums; }
+details>summary{ list-style:none; }
+details>summary::-webkit-details-marker{ display:none; }
+@media(max-width:768px){ .hero-title{ font-size:2.6rem !important; line-height:1.02 !important; } }
+</style>
+</head>
+<body class="antialiased">
+
+<!-- ANNOUNCEMENT -->
+<div class="bg-ink text-white text-[12.5px] font-medium relative z-[60]">
+  <div class="max-w-7xl mx-auto px-4 py-2 flex items-center justify-between gap-3">
+    <div class="flex items-center gap-2 truncate">
+      <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
+      <p class="truncate"><span class="font-bold text-gold-400">MMU ONLY</span> <span class="hidden sm:inline text-white/70">—</span> <span class="text-white/90">Verified Maasai Mara University students · Meet on campus · Pay with M-Pesa</span></p>
+    </div>
+    <div class="hidden md:flex items-center gap-4 text-white/70 shrink-0">
+      <button onclick="openModal('safetyModal')" class="hover:text-white flex items-center gap-1.5"><i class="fa-solid fa-shield-halved text-[12px]"></i> Safety</button>
+      <button onclick="openModal('setupModal')" class="hover:text-white flex items-center gap-1.5"><i class="fa-solid fa-code text-[12px]"></i> Dev Setup</button>
+      <span class="text-white/30">|</span><span class="flex items-center gap-1.5"><i class="fa-solid fa-location-dot text-ember-400"></i> Narok, Kenya</span>
+    </div>
+  </div>
+</div>
+
+<!-- DESKTOP HEADER -->
+<header class="hidden md:block sticky top-0 z-50 glass border-b border-[#ece6da]">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="flex items-center gap-6 py-3.5">
+      <a onclick="navigate('home')" class="flex items-center gap-3 cursor-pointer shrink-0">
+        <div class="w-11 h-11 rounded-2xl shuka grain relative flex items-center justify-center shadow-card overflow-hidden">
+          <span class="font-sora font-800 font-extrabold text-white text-xl relative z-10">M</span>
+          <span class="absolute -bottom-1 -right-1 w-5 h-5 bg-ember-500 rounded-full border-[3px] border-white"></span>
+        </div>
+        <div class="leading-none">
+          <div class="font-sora font-extrabold text-[20px] tracking-tight text-mara-800">MARA <span class="text-ember-500">MARKET</span></div>
+          <div class="text-[11px] font-semibold tracking-[.14em] text-mara-800/50 uppercase">MMU · Narok</div>
+        </div>
+      </a>
+      <div class="flex-1 max-w-xl">
+        <div class="relative">
+          <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-mara-800/40"></i>
+          <input id="deskSearch" onkeyup="if(event.key==='Enter') doGlobalSearch(this.value)" placeholder="Search sneakers, iPhone 11,单人 single rooms, braids..." class="w-full bg-[#f1ede6]/70 border border-transparent rounded-full pl-11 pr-24 py-3 text-[14px] font-medium placeholder:text-mara-800/40 focus:bg-white"/>
+          <button onclick="doGlobalSearch(document.getElementById('deskSearch').value)" class="absolute right-1.5 top-1/2 -translate-y-1/2 bg-mara-800 hover:bg-mara-700 text-white text-[13px] font-bold px-5 py-2 rounded-full transition">Search</button>
+        </div>
+      </div>
+      <nav class="flex items-center gap-1 text-[14px] font-semibold text-mara-800/80">
+        <button onclick="navigate('home')" data-nav="home" class="navlink px-4 py-2 rounded-full hover:bg-mara-50">Home</button>
+        <button onclick="navigate('explore')" data-nav="explore" class="navlink px-4 py-2 rounded-full hover:bg-mara-50">Explore</button>
+        <button onclick="navigate('businesses')" data-nav="businesses" class="navlink px-4 py-2 rounded-full hover:bg-mara-50">Businesses</button>
+        <button onclick="navigate('admin')" data-nav="admin" class="navlink px-4 py-2 rounded-full hover:bg-mara-50 hidden" id="adminLinkDesk">Admin</button>
+      </nav>
+      <div class="flex items-center gap-2.5 shrink-0" id="deskAuthArea"></div>
+    </div>
+  </div>
+</header>
+
+<!-- MOBILE HEADER -->
+<header class="md:hidden sticky top-0 z-50 glass border-b border-[#ece6da]">
+  <div class="px-4 pt-3 pb-2">
+    <div class="flex items-center justify-between">
+      <a onclick="navigate('home')" class="flex items-center gap-2.5 cursor-pointer">
+        <div class="w-9 h-9 rounded-xl shuka flex items-center justify-center relative"><span class="font-sora font-extrabold text-white text-lg">M</span><span class="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 bg-ember-500 rounded-full border-2 border-white"></span></div>
+        <div class="leading-none"><div class="font-sora font-extrabold text-[17px] text-mara-800">MARA <span class="text-ember-500">MARKET</span></div><div class="text-[9.5px] font-bold tracking-[.16em] text-mara-800/50">YOUR CAMPUS MARKETPLACE</div></div>
+      </a>
+      <div class="flex items-center gap-2">
+        <button onclick="navigate('saved')" class="w-9 h-9 rounded-full bg-[#f1ede6] flex items-center justify-center relative"><i class="fa-regular fa-heart text-mara-800"></i><span id="mobSavedCount" class="absolute -top-1 -right-1 w-5 h-5 bg-ember-500 text-white text-[10px] font-bold rounded-full hidden items-center justify-center">0</span></button>
+        <button onclick="navigate('messages')" class="w-9 h-9 rounded-full bg-[#f1ede6] flex items-center justify-center relative"><i class="fa-regular fa-comment-dots text-mara-800"></i><span id="mobMsgCount" class="absolute -top-1 -right-1 w-5 h-5 bg-mara-600 text-white text-[10px] font-bold rounded-full hidden items-center justify-center">0</span></button>
+        <div id="mobAuthArea"></div>
+      </div>
+    </div>
+    <div class="mt-2.5 relative">
+      <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-mara-800/40 text-sm"></i>
+      <input id="mobSearch" onkeyup="if(event.key==='Enter') doGlobalSearch(this.value)" placeholder="Search on Mara Market..." class="w-full bg-[#f1ede6]/80 rounded-full pl-10 pr-4 py-2.5 text-[14px] font-medium placeholder:text-mara-800/40 border border-transparent"/>
+    </div>
+  </div>
+</header>
+
+<main id="main" class="min-h-[80vh] pb-28 md:pb-10">
+
+<!-- ============ HOME ============ -->
+<section id="view-home">
+  <!-- HERO -->
+  <div class="shuka grain relative overflow-hidden">
+    <div class="hero-blob w-[420px] h-[420px] bg-ember-500 -top-32 -right-24"></div>
+    <div class="hero-blob w-[320px] h-[320px] bg-gold-400 top-40 -left-24" style="animation-delay:1.5s"></div>
+    <div class="hero-blob w-[220px] h-[220px] bg-emerald-400 bottom-0 right-1/3 opacity-30" style="animation-delay:3s"></div>
+    <div class="max-w-7xl mx-auto px-4 md:px-6 pt-8 md:pt-14 pb-10 md:pb-16 relative z-10 grid md:grid-cols-[1.05fr_.95fr] gap-8 items-center">
+      <div>
+        <div class="inline-flex items-center gap-2 bg-white/10 border border-white/15 backdrop-blur rounded-full pl-1.5 pr-4 py-1.5 mb-5">
+          <span class="bg-gold-400 text-mara-900 text-[11px] font-extrabold px-2.5 py-1 rounded-full tracking-wide">NEW SEMESTER</span>
+          <span class="text-white/85 text-[12.5px] font-semibold">2,400+ MMU students already trading</span>
+        </div>
+        <div class="flex items-center gap-2 mb-3">
+          <span class="h-[3px] w-10 bg-ember-500 rounded-full"></span><span class="text-gold-300 font-sora font-bold tracking-[.22em] text-[12px]">MARA MARKET · MMU</span>
+        </div>
+        <h1 class="hero-title font-sora font-extrabold text-white tracking-tight text-[44px] md:text-[64px] leading-[1.02]">Buy. Sell.<br/>Discover. <span class="text-transparent bg-clip-text bg-gradient-to-r from-gold-300 via-ember-400 to-ember-500">Right on campus.</span></h1>
+        <p class="text-white/70 font-medium text-[15px] md:text-[17px] mt-4 max-w-lg leading-relaxed">Your campus. Your marketplace. Thrift fits, phones, single rooms, home-cooked pilau & student hustles — all verified MMU sellers.</p>
+        <div class="mt-6 bg-white rounded-[20px] p-2 flex items-center gap-2 shadow-pop max-w-xl">
+          <div class="pl-3 text-mara-800/40"><i class="fa-solid fa-magnifying-glass"></i></div>
+          <input id="heroSearch" onkeyup="if(event.key==='Enter') doGlobalSearch(this.value)" placeholder="Try 'Air Force', 'single room', 'braids'..." class="flex-1 bg-transparent px-1 py-2.5 text-[14.5px] font-semibold placeholder:text-mara-800/35 min-w-0"/>
+          <button onclick="doGlobalSearch(document.getElementById('heroSearch').value)" class="bg-mara-800 hover:bg-mara-700 text-white font-bold text-[14px] px-5 md:px-7 py-3 rounded-2xl transition shrink-0">Search</button>
+          <button onclick="goSell()" class="bg-ember-500 hover:bg-ember-600 text-white font-bold text-[14px] px-5 md:px-7 py-3 rounded-2xl transition flex items-center gap-2 shrink-0"><i class="fa-solid fa-plus"></i><span class="hidden sm:inline">Sell Something</span><span class="sm:hidden">Sell</span></button>
+        </div>
+        <div class="flex flex-wrap gap-2 mt-4" id="heroQuickTags"></div>
+        <div class="flex items-center gap-6 mt-6">
+          <div><div class="font-sora font-extrabold text-white text-[20px]" id="statListings">800+</div><div class="text-white/55 text-[12px] font-semibold">Live listings</div></div>
+          <div class="w-px h-9 bg-white/15"></div>
+          <div><div class="font-sora font-extrabold text-white text-[20px]">100%</div><div class="text-white/55 text-[12px] font-semibold">MMU verified</div></div>
+          <div class="w-px h-9 bg-white/15"></div>
+          <div><div class="font-sora font-extrabold text-white text-[20px]">0%</div><div class="text-white/55 text-[12px] font-semibold">Commission</div></div>
+          <div class="hidden sm:flex items-center gap-2 ml-2">
+            <div class="flex -space-x-2" id="heroAvatars"></div>
+            <div class="text-white/70 text-[12px] font-semibold leading-tight">Trusted by<br/>hostels across Narok</div>
+          </div>
+        </div>
+      </div>
+      <!-- hero collage -->
+      <div class="relative hidden md:block h-[520px]">
+        <div class="absolute top-2 left-6 w-[250px] bg-white rounded-3xl p-3 shadow-pop rotate-[-6deg] card-hover cursor-pointer" onclick="openProduct('p2')">
+          <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&q=80&auto=format&fit=crop" class="w-full h-[190px] object-cover rounded-2xl" alt="sneaker"/>
+          <div class="p-2"><div class="font-bold text-[14px]">Nike Air Force 1 '07</div><div class="flex items-center justify-between mt-1"><span class="font-sora font-extrabold text-mara-700">KSh 3,800</span><span class="text-[11px] bg-mara-50 text-mara-700 font-bold px-2 py-0.5 rounded-full">Like New</span></div></div>
+          <div class="absolute -top-3 -right-3 bg-ember-500 text-white text-[11px] font-extrabold px-3 py-1.5 rounded-full shadow-lg rotate-[8deg]">TRENDING</div>
+        </div>
+        <div class="absolute top-48 right-0 w-[270px] bg-white rounded-3xl p-3 shadow-pop rotate-[5deg] card-hover cursor-pointer" onclick="openProduct('p3')">
+          <img src="https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=500&q=80&auto=format&fit=crop" class="w-full h-[180px] object-cover rounded-2xl" alt="iphone"/>
+          <div class="p-2"><div class="font-bold text-[14px]">iPhone 11 · 128GB</div><div class="flex items-center justify-between mt-1"><span class="font-sora font-extrabold text-mara-700">KSh 32,500</span><span class="text-[11px] bg-gold-400/20 text-yellow-700 font-bold px-2 py-0.5 rounded-full">Verified</span></div></div>
+        </div>
+        <div class="absolute bottom-2 left-16 w-[240px] bg-white rounded-3xl p-3 shadow-pop rotate-[-3deg] card-hover cursor-pointer" onclick="openProduct('p6')">
+          <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?w=500&q=80&auto=format&fit=crop" class="w-full h-[150px] object-cover rounded-2xl" alt="food"/>
+          <div class="p-2"><div class="font-bold text-[14px]">Friday Pilau + Samosa</div><div class="flex items-center justify-between mt-1"><span class="font-sora font-extrabold text-mara-700">KSh 150</span><span class="text-[11px] bg-ember-500/10 text-ember-600 font-bold px-2 py-0.5 rounded-full">Food</span></div></div>
+        </div>
+        <div class="absolute top-6 right-8 bg-white/95 backdrop-blur rounded-2xl px-4 py-3 shadow-pop flex items-center gap-3 rotate-[3deg]">
+          <div class="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center"><i class="fa-brands fa-whatsapp text-emerald-600 text-xl"></i></div>
+          <div><div class="text-[12px] font-extrabold">Chat seller instantly</div><div class="text-[11px] text-mara-800/50 font-semibold">Avg reply · 8 min</div></div>
+        </div>
+        <div class="absolute bottom-16 right-10 bg-mara-800 text-white rounded-2xl px-4 py-3 shadow-pop flex items-center gap-3 rotate-[-4deg]">
+          <div class="w-10 h-10 rounded-full bg-gold-400 flex items-center justify-center"><i class="fa-solid fa-shield-halved text-mara-900"></i></div>
+          <div><div class="text-[12px] font-extrabold">MMU Verified</div><div class="text-[11px] text-white/60 font-semibold">@mmu.ac.ke only</div></div>
+        </div>
+      </div>
+      <!-- mobile hero cards scroll -->
+      <div class="md:hidden flex gap-3 overflow-x-auto no-scrollbar -mx-4 px-4 pb-1">
+        <div onclick="openProduct('p2')" class="min-w-[170px] bg-white rounded-2xl p-2 shadow-card"><img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&q=80&auto=format&fit=crop" class="w-full h-[120px] object-cover rounded-xl"/><div class="p-1.5 font-bold text-[13px]">Nike Air Force 1</div><div class="px-1.5 pb-1 font-sora font-extrabold text-mara-700 text-[14px]">KSh 3,800</div></div>
+        <div onclick="openProduct('p3')" class="min-w-[170px] bg-white rounded-2xl p-2 shadow-card"><img src="https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=400&q=80&auto=format&fit=crop" class="w-full h-[120px] object-cover rounded-xl"/><div class="p-1.5 font-bold text-[13px]">iPhone 11 128GB</div><div class="px-1.5 pb-1 font-sora font-extrabold text-mara-700 text-[14px]">KSh 32,500</div></div>
+        <div onclick="openProduct('p6')" class="min-w-[170px] bg-white rounded-2xl p-2 shadow-card"><img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400&q=80&auto=format&fit=crop" class="w-full h-[120px] object-cover rounded-xl"/><div class="p-1.5 font-bold text-[13px]">Pilau Friday Special</div><div class="px-1.5 pb-1 font-sora font-extrabold text-mara-700 text-[14px]">KSh 150</div></div>
+      </div>
+    </div>
+    <!-- marquee -->
+    <div class="border-t border-white/10 bg-black/20 backdrop-blur relative z-10 overflow-hidden py-2.5">
+      <div class="flex whitespace-nowrap marquee-track gap-8 text-[12px] font-bold tracking-wide text-white/80" id="marquee"></div>
+    </div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 md:px-6">
+    <!-- CATEGORIES -->
+    <div class="flex items-end justify-between mt-8 md:mt-12 mb-4">
+      <div><h2 class="font-sora font-extrabold text-[22px] md:text-[28px] tracking-tight">Shop by category</h2><p class="text-mara-800/50 font-medium text-[13.5px]">12 campus-ready aisles · tap to explore</p></div>
+      <button onclick="navigate('explore')" class="hidden sm:flex items-center gap-2 text-[13.5px] font-bold text-mara-700 hover:gap-3 transition-all">View all <i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+    <div id="homeCategories" class="grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-12 gap-2.5 md:gap-3"></div>
+
+    <!-- TRENDING -->
+    <div class="flex items-end justify-between mt-10 mb-4">
+      <div class="flex items-center gap-3"><div class="w-10 h-10 rounded-2xl bg-ember-500 text-white flex items-center justify-center shadow-card"><i class="fa-solid fa-fire"></i></div><div><h2 class="font-sora font-extrabold text-[20px] md:text-[26px] tracking-tight leading-none">Trending on Campus</h2><p class="text-mara-800/50 font-medium text-[13px] mt-1">Most viewed this week in Narok</p></div></div>
+      <button onclick="navigate('explore','trending')" class="text-[13px] font-bold text-mara-700 bg-mara-50 hover:bg-mara-100 px-4 py-2 rounded-full transition">See all</button>
+    </div>
+    <div id="trendingGrid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-5"></div>
+
+    <!-- SELL BANNER -->
+    <div class="mt-10 rounded-[24px] overflow-hidden relative shuka grain">
+      <div class="hero-blob w-[300px] h-[300px] bg-ember-500 -top-20 right-10"></div>
+      <div class="relative z-10 p-6 md:p-10 grid md:grid-cols-2 gap-6 items-center">
+        <div><div class="text-gold-300 font-bold text-[12px] tracking-[.2em]">ZERO COMMISSION · M-PESA READY</div>
+        <h3 class="font-sora font-extrabold text-white text-[26px] md:text-[34px] leading-tight mt-2">Turn your hostel room<br/>into a business.</h3>
+        <p class="text-white/65 font-medium mt-2 text-[14px]">List in under 60 seconds. Meet at the Library Square. Get paid instantly.</p>
+        <div class="flex flex-wrap gap-3 mt-5"><button onclick="goSell()" class="bg-white text-mara-800 font-extrabold px-6 py-3 rounded-full text-[14px] hover:bg-gold-300 transition flex items-center gap-2"><i class="fa-solid fa-plus"></i> Sell Something</button><button onclick="navigate('businesses')" class="border border-white/25 text-white font-bold px-6 py-3 rounded-full text-[14px] hover:bg-white/10 transition">Showcase business</button></div></div>
+        <div class="grid grid-cols-3 gap-3 text-center">
+          <div class="bg-white/10 border border-white/15 backdrop-blur rounded-2xl p-4"><div class="font-sora font-extrabold text-white text-[22px]">60s</div><div class="text-white/60 text-[11.5px] font-bold">To list</div></div>
+          <div class="bg-white/10 border border-white/15 backdrop-blur rounded-2xl p-4"><div class="font-sora font-extrabold text-white text-[22px]">8min</div><div class="text-white/60 text-[11.5px] font-bold">Avg reply</div></div>
+          <div class="bg-white/10 border border-white/15 backdrop-blur rounded-2xl p-4"><div class="font-sora font-extrabold text-white text-[22px]">4.9★</div><div class="text-white/60 text-[11.5px] font-bold">Trust score</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RECENTLY ADDED -->
+    <div class="flex items-end justify-between mt-10 mb-4">
+      <div class="flex items-center gap-3"><div class="w-10 h-10 rounded-2xl bg-mara-800 text-white flex items-center justify-center shadow-card text-lg">🆕</div><div><h2 class="font-sora font-extrabold text-[20px] md:text-[26px] tracking-tight leading-none">Recently Added</h2><p class="text-mara-800/50 font-medium text-[13px] mt-1">Fresh drops from your classmates</p></div></div>
+      <button onclick="navigate('explore','newest')" class="text-[13px] font-bold text-mara-700 bg-mara-50 hover:bg-mara-100 px-4 py-2 rounded-full transition">See all</button>
+    </div>
+    <div id="recentGrid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-5"></div>
+
+    <!-- STUDENT BUSINESSES -->
+    <div class="flex items-end justify-between mt-10 mb-4">
+      <div><h2 class="font-sora font-extrabold text-[20px] md:text-[26px] tracking-tight">Student Businesses</h2><p class="text-mara-800/50 font-medium text-[13px]">Campus hustles you should know</p></div>
+      <button onclick="navigate('businesses')" class="text-[13px] font-bold text-mara-700 bg-mara-50 hover:bg-mara-100 px-4 py-2 rounded-full transition">Directory</button>
+    </div>
+    <div id="homeBusinesses" class="flex gap-4 overflow-x-auto no-scrollbar -mx-4 px-4 md:mx-0 md:px-0 md:grid md:grid-cols-3 pb-2"></div>
+
+    <!-- POPULAR -->
+    <div class="flex items-end justify-between mt-10 mb-4">
+      <div class="flex items-center gap-3"><div class="w-10 h-10 rounded-2xl bg-gold-400 text-mara-900 flex items-center justify-center shadow-card"><i class="fa-solid fa-heart"></i></div><div><h2 class="font-sora font-extrabold text-[20px] md:text-[26px] tracking-tight leading-none">Popular Products</h2><p class="text-mara-800/50 font-medium text-[13px] mt-1">Most saved by MMU students</p></div></div>
+    </div>
+    <div id="popularGrid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-5"></div>
+
+    <!-- WHY -->
+    <div class="mt-12 mb-4 text-center"><div class="text-ember-500 font-bold text-[12px] tracking-[.22em]">WHY MARA MARKET?</div><h2 class="font-sora font-extrabold text-[26px] md:text-[36px] tracking-tight mt-1">Built for campus life.</h2><p class="text-mara-800/50 font-medium">Not Jiji. Not Facebook. Yours.</p></div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-5 mt-6">
+      <div class="bg-white rounded-3xl p-6 shadow-card border border-[#f0e9db] card-hover"><div class="w-12 h-12 rounded-2xl bg-mara-800 text-white flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-graduation-cap"></i></div><h3 class="font-sora font-bold text-[16px]">Verified Students Only</h3><p class="text-[13.5px] text-mara-800/60 font-medium mt-1.5 leading-relaxed">Every seller signs up with an @mmu.ac.ke email. No outsiders, no scams from town.</p></div>
+      <div class="bg-white rounded-3xl p-6 shadow-card border border-[#f0e9db] card-hover"><div class="w-12 h-12 rounded-2xl bg-ember-500 text-white flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-location-dot"></i></div><h3 class="font-sora font-bold text-[16px]">Meet on Campus</h3><p class="text-[13.5px] text-mara-800/60 font-medium mt-1.5 leading-relaxed">Filter by hostel — Kilgoris, Magadi, Ole Ntimama. Meet at Library Square or the Gate.</p></div>
+      <div class="bg-white rounded-3xl p-6 shadow-card border border-[#f0e9db] card-hover"><div class="w-12 h-12 rounded-2xl bg-emerald-600 text-white flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-money-bill-wave"></i></div><h3 class="font-sora font-bold text-[16px]">M-Pesa Ready</h3><p class="text-[13.5px] text-mara-800/60 font-medium mt-1.5 leading-relaxed">Chat on WhatsApp, pay with M-Pesa Till. Zero commission — you keep 100%.</p></div>
+      <div class="bg-white rounded-3xl p-6 shadow-card border border-[#f0e9db] card-hover"><div class="w-12 h-12 rounded-2xl bg-gold-400 text-mara-900 flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-shield-halved"></i></div><h3 class="font-sora font-bold text-[16px]">Safe by Design</h3><p class="text-[13.5px] text-mara-800/60 font-medium mt-1.5 leading-relaxed">Report button, safety tips, admin moderation & meet-up guidance on every listing.</p></div>
+    </div>
+
+    <!-- SAFETY STRIP -->
+    <div class="mt-8 bg-amber-50 border border-amber-200 rounded-3xl p-5 md:p-6 flex gap-4 items-start">
+      <div class="w-11 h-11 rounded-2xl bg-amber-400 text-white flex items-center justify-center shrink-0 text-lg"><i class="fa-solid fa-triangle-exclamation"></i></div>
+      <div class="text-[13.5px]"><span class="font-extrabold">Stay safe, comrade:</span> <span class="text-mara-800/70 font-medium">Always meet in public on campus (Library Square, Student Centre), inspect before paying, use M-Pesa — never send money in advance. Mara Market never asks for your M-Pesa PIN. <button onclick="openModal('safetyModal')" class="font-bold text-mara-700 underline">Read safety guide</button></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EXPLORE ============ -->
+<section id="view-explore" class="hidden">
+  <div class="max-w-7xl mx-auto px-4 md:px-6 pt-5 md:pt-8">
+    <h1 class="font-sora font-extrabold text-[26px] md:text-[36px] tracking-tight">Explore <span class="text-ember-500">the market</span></h1>
+    <p class="text-mara-800/50 font-medium text-[14px]" id="exploreSub">Everything on campus, right now.</p>
+    <div class="mt-4 bg-white rounded-3xl border border-[#ece6da] shadow-card p-3 md:p-4">
+      <div class="flex gap-2">
+        <div class="relative flex-1"><i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-mara-800/35 text-sm"></i><input id="exploreSearch" oninput="applyExplore()" placeholder="Search products, sellers, hostels..." class="w-full bg-[#f6f2ea] rounded-2xl pl-10 pr-4 py-3 text-[14px] font-semibold placeholder:text-mara-800/35 border border-transparent"/></div>
+        <button onclick="toggleMobileFilters()" class="md:hidden bg-mara-800 text-white px-4 rounded-2xl text-[13px] font-bold"><i class="fa-solid fa-sliders"></i></button>
+        <select id="exploreSort" onchange="applyExplore()" class="bg-[#f6f2ea] rounded-2xl px-4 py-3 text-[13px] font-bold text-mara-800 border border-transparent cursor-pointer"><option value="newest">Newest first</option><option value="popular">Most popular</option><option value="trending">Trending</option><option value="low">Price: Low → High</option><option value="high">Price: High → Low</option></select>
+      </div>
+      <div id="exploreCats" class="flex gap-2 overflow-x-auto no-scrollbar mt-3 pb-1"></div>
+    </div>
+    <div class="grid md:grid-cols-[240px_1fr] gap-5 mt-5 items-start">
+      <aside id="filterPanel" class="hidden md:block bg-white rounded-3xl border border-[#ece6da] shadow-card p-5 sticky top-24">
+        <div class="flex items-center justify-between mb-4"><h3 class="font-sora font-extrabold">Filters</h3><button onclick="clearFilters()" class="text-[12px] font-bold text-ember-500">Clear all</button></div>
+        <div class="text-[12px] font-extrabold tracking-wide text-mara-800/50 mb-2">CONDITION</div>
+        <div id="condFilters" class="flex flex-wrap gap-2 mb-5"></div>
+        <div class="text-[12px] font-extrabold tracking-wide text-mara-800/50 mb-2">MAX PRICE · <span id="priceLabel" class="text-mara-700">KSh 50,000</span></div>
+        <input id="priceRange" type="range" min="100" max="50000" step="100" value="50000" oninput="document.getElementById('priceLabel').textContent='KSh '+Number(this.value).toLocaleString(); applyExplore()" class="w-full accent-[#0b3b2e] mb-5"/>
+        <div class="text-[12px] font-extrabold tracking-wide text-mara-800/50 mb-2">LOCATION</div>
+        <select id="locFilter" onchange="applyExplore()" class="w-full bg-[#f6f2ea] rounded-xl px-3 py-2.5 text-[13px] font-semibold mb-5 border border-transparent"><option value="">All locations</option></select>
+        <label class="flex items-center gap-2.5 text-[13.5px] font-bold cursor-pointer mb-2"><input id="verifiedOnly" type="checkbox" onchange="applyExplore()" class="w-4 h-4 accent-[#0b3b2e]"/> Verified sellers only</label>
+        <label class="flex items-center gap-2.5 text-[13.5px] font-bold cursor-pointer"><input id="availOnly" type="checkbox" checked onchange="applyExplore()" class="w-4 h-4 accent-[#0b3b2e]"/> Hide sold items</label>
+      </aside>
+      <div>
+        <div class="flex items-center justify-between mb-3"><div id="exploreCount" class="text-[13px] font-bold text-mara-800/60"></div><div id="activeFilterTags" class="flex gap-2 flex-wrap"></div></div>
+        <div id="exploreGrid" class="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-5"></div>
+        <div id="exploreEmpty" class="hidden text-center py-16"><div class="w-20 h-20 mx-auto rounded-3xl bg-[#f1ede6] flex items-center justify-center text-3xl mb-4"><i class="fa-regular fa-face-frown text-mara-800/40"></i></div><h3 class="font-sora font-bold text-lg">No matches, comrade</h3><p class="text-mara-800/50 text-[14px] font-medium">Try a different search or clear filters.</p><button onclick="clearFilters()" class="mt-4 bg-mara-800 text-white font-bold text-[13px] px-6 py-2.5 rounded-full">Clear filters</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRODUCT DETAIL ============ -->
+<section id="view-product" class="hidden"><div class="max-w-6xl mx-auto px-4 md:px-6 pt-5 md:pt-8" id="productDetailWrap"></div></section>
+<!-- ============ SELLER ============ -->
+<section id="view-seller" class="hidden"><div class="max-w-6xl mx-auto px-4 md:px-6 pt-5 md:pt-8" id="sellerWrap"></div></section>
+<!-- ============ SAVED ============ -->
+<section id="view-saved" class="hidden"><div class="max-w-7xl mx-auto px-4 md:px-6 pt-6 md:pt-10" id="savedWrap"></div></section>
+<!-- ============ MESSAGES ============ -->
+<section id="view-messages" class="hidden"><div class="max-w-6xl mx-auto px-4 md:px-6 pt-5 md:pt-8" id="messagesWrap"></div></section>
+<!-- ============ SELL ============ -->
+<section id="view-sell" class="hidden"><div class="max-w-3xl mx-auto px-4 md:px-6 pt-6 md:pt-10" id="sellWrap"></div></section>
+<!-- ============ PROFILE ============ -->
+<section id="view-profile" class="hidden"><div class="max-w-5xl mx-auto px-4 md:px-6 pt-6 md:pt-10" id="profileWrap"></div></section>
+<!-- ============ ADMIN ============ -->
+<section id="view-admin" class="hidden"><div class="max-w-7xl mx-auto px-4 md:px-6 pt-6 md:pt-10" id="adminWrap"></div></section>
+<!-- ============ BUSINESSES ============ -->
+<section id="view-businesses" class="hidden"><div class="max-w-7xl mx-auto px-4 md:px-6 pt-6 md:pt-10" id="bizWrap"></div></section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="hidden md:block bg-mara-950 text-white mt-16 relative overflow-hidden">
+  <div class="hero-blob w-[400px] h-[400px] bg-ember-600 -bottom-40 -right-20 opacity-20"></div>
+  <div class="max-w-7xl mx-auto px-6 py-14 grid grid-cols-4 gap-8 relative z-10">
+    <div><div class="flex items-center gap-3 mb-4"><div class="w-10 h-10 rounded-xl shuka flex items-center justify-center font-sora font-extrabold text-lg">M</div><div class="font-sora font-extrabold text-lg">MARA <span class="text-ember-400">MARKET</span></div></div><p class="text-white/55 text-[13.5px] font-medium leading-relaxed">Your campus. Your marketplace.<br/>Built by MMU students, for MMU students. Narok, Kenya.</p><div class="flex gap-2 mt-4"><a class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-ember-500 transition cursor-pointer"><i class="fa-brands fa-instagram text-sm"></i></a><a class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-ember-500 transition cursor-pointer"><i class="fa-brands fa-x-twitter text-sm"></i></a><a class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-ember-500 transition cursor-pointer"><i class="fa-brands fa-whatsapp text-sm"></i></a><a class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-ember-500 transition cursor-pointer"><i class="fa-brands fa-tiktok text-sm"></i></a></div></div>
+    <div><h4 class="font-sora font-bold text-[14px] mb-4 text-gold-300">MARKETPLACE</h4><div class="space-y-2.5 text-[13.5px] font-medium text-white/60"><button onclick="navigate('explore')" class="block hover:text-white">Explore all</button><button onclick="goSell()" class="block hover:text-white">Sell something</button><button onclick="navigate('businesses')" class="block hover:text-white">Student businesses</button><button onclick="navigate('saved')" class="block hover:text-white">Saved items</button></div></div>
+    <div><h4 class="font-sora font-bold text-[14px] mb-4 text-gold-300">TRUST & SAFETY</h4><div class="space-y-2.5 text-[13.5px] font-medium text-white/60"><button onclick="openModal('safetyModal')" class="block hover:text-white">Safety guide</button><button onclick="openModal('safetyModal')" class="block hover:text-white">Meet-up spots</button><button onclick="openModal('setupModal')" class="block hover:text-white">Report a listing</button><button onclick="openModal('setupModal')" class="block hover:text-white">Community rules</button></div></div>
+    <div><h4 class="font-sora font-bold text-[14px] mb-4 text-gold-300">CAMPUS</h4><div class="space-y-2.5 text-[13.5px] font-medium text-white/60"><p><i class="fa-solid fa-location-dot mr-2 text-ember-400"></i>Maasai Mara University, Narok</p><p><i class="fa-solid fa-envelope mr-2 text-ember-400"></i>hello@maramarket.mmu.ac.ke</p><p><i class="fa-solid fa-phone mr-2 text-ember-400"></i>+254 700 000 000</p><button onclick="openModal('setupModal')" class="mt-2 text-[12px] bg-white/10 hover:bg-white/20 px-4 py-2 rounded-full font-bold transition"><i class="fa-solid fa-code mr-1"></i> Developer setup guide</button></div></div>
+  </div>
+  <div class="border-t border-white/10 relative z-10"><div class="max-w-7xl mx-auto px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-2 text-[12px] text-white/40 font-medium"><span>© 2026 Mara Market · MMU Student Project · Made in Narok 🇰🇪</span><span>Disclaimer: Mara Market is a student demo. Always verify items in person & never share M-Pesa PIN.</span></div></div>
+</footer>
+
+<!-- MOBILE BOTTOM NAV -->
+<nav class="md:hidden fixed bottom-0 inset-x-0 z-50 glass border-t border-[#ece6da] bottom-nav">
+  <div class="grid grid-cols-5 items-end px-2 pt-2 pb-2">
+    <button onclick="navigate('home')" data-nav="home" class="mnav flex flex-col items-center gap-1 py-1 text-mara-800/45"><i class="fa-solid fa-house text-[19px]"></i><span class="text-[10.5px] font-extrabold">Home</span></button>
+    <button onclick="navigate('explore')" data-nav="explore" class="mnav flex flex-col items-center gap-1 py-1 text-mara-800/45"><i class="fa-solid fa-compass text-[19px]"></i><span class="text-[10.5px] font-extrabold">Explore</span></button>
+    <button onclick="goSell()" class="flex flex-col items-center -mt-7"><span class="w-[58px] h-[58px] rounded-full bg-gradient-to-br from-ember-400 to-ember-600 text-white flex items-center justify-center text-[22px] shadow-pop border-4 border-[#FAF8F4]"><i class="fa-solid fa-plus"></i></span><span class="text-[10.5px] font-extrabold text-mara-800 mt-0.5">Sell</span></button>
+    <button onclick="navigate('saved')" data-nav="saved" class="mnav flex flex-col items-center gap-1 py-1 text-mara-800/45 relative"><i class="fa-regular fa-heart text-[19px]"></i><span class="text-[10.5px] font-extrabold">Saved</span><span id="mobSavedDot" class="hidden absolute top-0 right-6 w-2.5 h-2.5 bg-ember-500 rounded-full"></span></button>
+    <button onclick="navigate('messages')" data-nav="messages" class="mnav flex flex-col items-center gap-1 py-1 text-mara-800/45 relative"><i class="fa-regular fa-comment-dots text-[19px]"></i><span class="text-[10.5px] font-extrabold">Chats</span><span id="mobMsgDot" class="hidden absolute top-0 right-6 w-2.5 h-2.5 bg-mara-600 rounded-full"></span></button>
+  </div>
+</nav>
+
+<!-- ============ MODALS ============ -->
+<div id="authModal" class="hidden fixed inset-0 z-[100] modal-bg flex items-end sm:items-center justify-center p-0 sm:p-4" onclick="if(event.target===this) closeModal('authModal')">
+  <div class="bg-white w-full sm:max-w-[440px] rounded-t-[28px] sm:rounded-[28px] p-6 md:p-8 max-h-[92vh] overflow-y-auto toast-in">
+    <div class="flex items-center justify-between mb-1"><div class="flex items-center gap-2.5"><div class="w-10 h-10 rounded-xl shuka flex items-center justify-center font-sora font-extrabold text-white">M</div><div class="font-sora font-extrabold text-[18px]">MARA MARKET</div></div><button onclick="closeModal('authModal')" class="w-9 h-9 rounded-full bg-[#f1ede6] flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button></div>
+    <p class="text-[13px] font-semibold text-mara-800/50 mb-5">Student-only · @mmu.ac.ke verified</p>
+    <div class="grid grid-cols-3 bg-[#f1ede6] rounded-full p-1 mb-6 text-[13px] font-bold" id="authTabs">
+      <button onclick="switchAuth('login')" data-at="login" class="py-2 rounded-full tab-active transition">Log in</button>
+      <button onclick="switchAuth('signup')" data-at="signup" class="py-2 rounded-full transition text-mara-800/60">Sign up</button>
+      <button onclick="switchAuth('forgot')" data-at="forgot" class="py-2 rounded-full transition text-mara-800/60">Reset</button>
+    </div>
+    <div id="auth-login">
+      <label class="text-[12.5px] font-extrabold">CAMPUS EMAIL</label><input id="liEmail" placeholder="you@mmu.ac.ke" class="mt-1.5 w-full bg-[#f6f2ea] rounded-2xl px-4 py-3 text-[14px] font-semibold border border-transparent mb-3"/>
+      <label class="text-[12.5px] font-extrabold">PASSWORD</label><div class="relative mt-1.5 mb-1"><input id="liPass" type="password" placeholder="••••••••" class="w-full bg-[#f6f2ea] rounded-2xl px-4 py-3 text-[14px] font-semibold border border-transparent pr-11"/><button onclick="this.previousElementSibling.type=this.previousElementSibling.type==='password'?'text':'password'" class="absolute right-3 top-1/2 -translate-y-1/2 text-mara-800/40"><i class="fa-regular fa-eye"></i></button></div>
+      <div class="text-right mb-4"><button onclick="switchAuth('forgot')" class="text-[12.5px] font-bold text-mara-700">Forgot password?</button></div>
+      <button onclick="doLogin()" class="w-full bg-mara-800 hover:bg-mara-700 text-white font-extrabold py-3.5 rounded-2xl text-[14.5px] transition">Log in →</button>
+      <div class="mt-4 bg-mara-50 border border-mara-100 rounded-2xl p-3 text-[12px] font-semibold text-mara-800/70">Demo: <button onclick="fillDemo()" class="font-extrabold text-mara-700 underline">demo@mmu.ac.ke / demo1234</button> · Admin: <button onclick="fillAdmin()" class="font-extrabold text-mara-700 underline">admin@mmu.ac.ke / mara2026</button></div>
+    </div>
+    <div id="auth-signup" class="hidden">
+      <div class="grid grid-cols-2 gap-2.5 mb-3"><div><label class="text-[12.5px] font-extrabold">FULL NAME</label><input id="suName" placeholder="Brian Kiprotich" class="mt-1.5 w-full bg-[#f6f2ea] rounded-2xl px-4 py-3 text-[14px] font-semibold border border-transparent"/></div><div><label class="text-[12.5px] font-extrabold">PHONE (M-Pesa)</label><input id="suPhone" placeholder="0712 345 678" class="mt-1.5 w-full bg-[#f6f2ea] rounded-2xl px-4 py-3 text-[14px] font-semibold border border-transparent"/></div></div>
+      <label class="text-[12.5px] font-extrabold">CAMPUS EMAIL</label><input id="suEmail" placeholder="you@mmu.ac.ke" class="mt-1.5 w-full bg-[#f6f2ea] rounded-2xl px-4 py-3 text-[14px] font-semibold border border-transparent mb-3"/>
+      <div class="grid grid-cols-2 gap-2.5 mb-3"><div><label class="text-[12.5px] font-extrabold">HOSTEL / AREA</label><select id="suHostel" class="mt-1.5 w-full bg-[#f6f2ea] rounded-2xl px-3 py-3 text-[14px] font-semibold border border-transparent"><option>Kilgoris Hostels</option><option>Magadi Hostels</option><option>Ole Ntimama</option><option>Narok Town</option><option>Campus Gate</option><option>Lenana Hostels</option></select></div><div><label class="text-[12.5px] font-extrabold">PASSWORD</label><input id="suPass" type="password" placeholder="Min 6 chars" class="mt-1.5 w-full bg-[#f6f2ea] rounded-2xl px-4 py-3 text-[14px] font-semibold border border-transparent"/></div></div>
+      <label class="flex items-start gap-2 text-[12px] font-semibold text-mara-800/60 mb-4"><input type="checkbox" id="suAgree" checked class="mt-0.5 accent-[#0b3b2e]"/> I’m an MMU student & agree to meet safely on campus and follow community rules.</label>
+      <button onclick="doSignup()" class="w-full bg-ember-500 hover:bg-ember-600 text-white font-extrabold py-3.5 rounded-2xl text-[14.5px] transition">Create account</button>
+    </div>
+    <div id="auth-forgot" class="hidden">
+      <p class="text-[13.5px] font-medium text-mara-800/60 mb-4">Enter your campus email and we’ll send a reset link. (Demo: simulated instantly.)</p>
+      <label class="text-[12.5px] font-extrabold">CAMPUS EMAIL</label><input id="fpEmail" placeholder="you@mmu.ac.ke" class="mt-1.5 w-full bg-[#f6f2ea] rounded-2xl px-4 py-3 text-[14px] font-semibold border border-transparent mb-3"/>
+      <div id="fpDone" class="hidden bg-emerald-50 border border-emerald-200 rounded-2xl p-4 text-[13px] font-semibold text-emerald-800 mb-3"></div>
+      <button onclick="doForgot()" class="w-full bg-mara-800 text-white font-extrabold py-3.5 rounded-2xl text-[14.5px]">Send reset link</button>
+    </div>
+  </div>
+</div>
+
+<div id="reportModal" class="hidden fixed inset-0 z-[100] modal-bg flex items-end sm:items-center justify-center sm:p-4" onclick="if(event.target===this) closeModal('reportModal')">
+  <div class="bg-white w-full sm:max-w-[420px] rounded-t-[28px] sm:rounded-[28px] p-6 toast-in">
+    <div class="flex items-center justify-between mb-4"><h3 class="font-sora font-extrabold text-[18px]">Report listing</h3><button onclick="closeModal('reportModal')" class="w-9 h-9 rounded-full bg-[#f1ede6] flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button></div>
+    <p class="text-[13px] text-mara-800/55 font-medium mb-4">Our student mods review reports within 24hrs. Stay anonymous.</p>
+    <div id="reportReasons" class="space-y-2"></div>
+    <textarea id="reportNote" placeholder="Extra details (optional)..." class="mt-3 w-full bg-[#f6f2ea] rounded-2xl px-4 py-3 text-[13.5px] font-medium border border-transparent h-20 resize-none"></textarea>
+    <button onclick="submitReport()" class="mt-3 w-full bg-red-600 hover:bg-red-700 text-white font-extrabold py-3 rounded-2xl text-[14px] transition">Submit report</button>
+  </div>
+</div>
+
+<div id="contactModal" class="hidden fixed inset-0 z-[100] modal-bg flex items-end sm:items-center justify-center sm:p-4" onclick="if(event.target===this) closeModal('contactModal')">
+  <div class="bg-white w-full sm:max-w-[420px] rounded-t-[28px] sm:rounded-[28px] p-6 toast-in" id="contactBody"></div>
+</div>
+
+<div id="safetyModal" class="hidden fixed inset-0 z-[100] modal-bg flex items-end sm:items-center justify-center sm:p-4" onclick="if(event.target===this) closeModal('safetyModal')">
+  <div class="bg-white w-full sm:max-w-[520px] rounded-t-[28px] sm:rounded-[28px] p-6 md:p-8 max-h-[90vh] overflow-y-auto toast-in">
+    <div class="flex items-center justify-between mb-4"><h3 class="font-sora font-extrabold text-[20px] flex items-center gap-2"><span class="w-9 h-9 rounded-xl bg-amber-400 text-white flex items-center justify-center"><i class="fa-solid fa-shield-halved"></i></span> Safety Guide</h3><button onclick="closeModal('safetyModal')" class="w-9 h-9 rounded-full bg-[#f1ede6] flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button></div>
+    <div class="space-y-3 text-[13.5px] font-medium">
+      <div class="bg-mara-50 rounded-2xl p-4"><b>1. Meet on campus, in public.</b><br/><span class="text-mara-800/65">Best spots: Library Square, Student Centre, Campus Gate cafeteria — daytime only. Never go to someone's room alone for a first meet.</span></div>
+      <div class="bg-mara-50 rounded-2xl p-4"><b>2. Inspect before you pay.</b><br/><span class="text-mara-800/65">Test electronics, try shoes, check M-Pesa phone IMEI (*#06#). For rooms, view in person with a friend.</span></div>
+      <div class="bg-mara-50 rounded-2xl p-4"><b>3. Pay with M-Pesa, in person.</b><br/><span class="text-mara-800/65">Never send deposits in advance. Mara Market will NEVER ask for your M-Pesa PIN.</span></div>
+      <div class="bg-red-50 border border-red-100 rounded-2xl p-4"><b class="text-red-700">Red flags:</b><span class="text-red-900/70"> prices too good to be true, seller refuses campus meet-up, asks for delivery fee upfront, non-MMU email.</span></div>
+      <p class="text-mara-800/50 text-[12.5px] pt-1"><b>Disclaimer:</b> Mara Market connects students but does not handle payments or deliveries. All transactions are at your own risk — stay alert, comrade.</p>
+    </div>
+  </div>
+</div>
+
+<div id="setupModal" class="hidden fixed inset-0 z-[100] modal-bg flex items-end sm:items-center justify-center sm:p-4" onclick="if(event.target===this) closeModal('setupModal')">
+  <div class="bg-white w-full sm:max-w-[620px] rounded-t-[28px] sm:rounded-[28px] p-6 md:p-8 max-h-[90vh] overflow-y-auto toast-in">
+    <div class="flex items-center justify-between mb-3"><h3 class="font-sora font-extrabold text-[20px]">Developer Setup · Next.js + Supabase</h3><button onclick="closeModal('setupModal')" class="w-9 h-9 rounded-full bg-[#f1ede6] flex items-center justify-center shrink-0"><i class="fa-solid fa-xmark"></i></button></div>
+    <div class="text-[13px] font-medium space-y-3 text-mara-800/75">
+      <p>This interactive MVP runs fully in one file using <b>LocalStorage as the database layer</b> (tables: users, products, categories, images, favorites, seller_profiles, messages, reports). To ship production:</p>
+      <div class="bg-mara-950 text-emerald-200 rounded-2xl p-4 font-mono text-[12px] overflow-x-auto whitespace-pre">npx create-next-app@latest mara-market --tailwind
+cd mara-market && npm i @supabase/supabase-js
+# .env.local
+NEXT_PUBLIC_SUPABASE_URL=...
+NEXT_PUBLIC_SUPABASE_ANON_KEY=...
+npm run dev  # → http://localhost:3000</div>
+      <div class="bg-[#f6f2ea] rounded-2xl p-4 font-mono text-[11.5px] overflow-x-auto whitespace-pre">-- PostgreSQL / Supabase schema
+create table users(id uuid primary key default gen_random_uuid(), name text, email text unique, phone text, hostel text, avatar text, verified bool default false, role text default 'student', created_at timestamptz default now());
+create table categories(id text primary key, name text, icon text, color text);
+create table seller_profiles(id uuid primary key, user_id uuid references users(id), shop_name text, bio text, cover text, rating numeric default 5, followers int default 0);
+create table products(id text primary key, seller_id uuid references users(id), title text, price int, category text references categories(id), condition text, description text, location text, negotiable bool, sold bool default false, featured bool default false, views int default 0, created_at timestamptz default now());
+create table images(id uuid primary key default gen_random_uuid(), product_id text references products(id) on delete cascade, url text, pos int);
+create table favorites(user_id uuid references users(id), product_id text references products(id), primary key(user_id, product_id));
+create table messages(id uuid primary key default gen_random_uuid(), from_id uuid, to_id uuid, product_id text, body text, created_at timestamptz default now());
+create table reports(id uuid primary key default gen_random_uuid(), product_id text, reporter_id uuid, reason text, note text, status text default 'open', created_at timestamptz default now());
+-- Storage: bucket `listing-images` (public). RLS: students read all; insert own; admin full.</div>
+      <p><b>Categories are config-driven:</b> edit the <span class="font-mono bg-[#f1ede6] px-1.5 py-0.5 rounded">CATEGORIES</span> array at the top of the script — Explore, Home & Sell update automatically.</p>
+    </div>
+  </div>
+</div>
+
+<div id="lightbox" class="hidden fixed inset-0 z-[110] bg-black/90 flex items-center justify-center p-4" onclick="closeModal('lightbox')"><img id="lightboxImg" src="" class="max-w-full max-h-[85vh] rounded-2xl shadow-pop object-contain"/></div>
+<div id="toasts" class="fixed bottom-24 md:bottom-6 left-1/2 -translate-x-1/2 md:left-auto md:translate-x-0 md:right-6 z-[120] flex flex-col gap-2 items-center md:items-end w-[92%] md:w-auto"></div>
+
+<script>
+/* ================================================================
+   MARA MARKET — MMU Student Marketplace (Single-file MVP)
+   DB layer: LocalStorage (mirrors Supabase/Postgres schema)
+   Tables: users, products, categories, images(embedded), favorites,
+           seller_profiles(businesses), messages, reports
+================================================================ */
+const CATEGORIES = [
+  {id:'fashion', name:'Fashion', icon:'👕', color:'#7c3aed'},
+  {id:'shoes', name:'Shoes', icon:'👟', color:'#e63e15'},
+  {id:'phones', name:'Phones & Acc.', icon:'📱', color:'#0ea5e9'},
+  {id:'electronics', name:'Electronics', icon:'💻', color:'#14865f'},
+  {id:'food', name:'Food & Snacks', icon:'🍔', color:'#f59e0b'},
+  {id:'beauty', name:'Beauty', icon:'💄', color:'#ec4899'},
+  {id:'books', name:'Books & Stationery', icon:'📚', color:'#6366f1'},
+  {id:'hostel', name:'Hostel & Room', icon:'🛏️', color:'#14b8a6'},
+  {id:'furniture', name:'Furniture', icon:'🪑', color:'#a16207'},
+  {id:'art', name:'Art & Creative', icon:'🎨', color:'#d946ef'},
+  {id:'services', name:'Services', icon:'🛠️', color:'#475569'},
+  {id:'other', name:'Other', icon:'📦', color:'#78716c'},
+];
+const LOCATIONS = ['Kilgoris Hostels','Magadi Hostels','Ole Ntimama','Narok Town','Campus Gate','Lenana Hostels','Library Square','Student Centre'];
+const CONDS = ['New','Like New','Used','Refurbished'];
+const LS_KEY='maramarket_db_v1', LS_SES='maramarket_session_v1';
+
+/* ---------- SEED ---------- */
+function seedDB(){
+  const now = Date.now(), H=36e5, D=24*H;
+  const users=[
+    {id:'u1', name:'Faith Naliaka', email:'faith@mmu.ac.ke', pass:'demo1234', phone:'254712345678', hostel:'Kilgoris Hostels', avatar:'https://randomuser.me/api/portraits/women/65.jpg', verified:true, role:'student', rating:4.9, reviews:132, joined:now-200*D, bio:'Thrift plug 🔥 New drops every Friday. Meet at Library Square.'},
+    {id:'u2', name:'Brian Kiprotich', email:'demo@mmu.ac.ke', pass:'demo1234', phone:'254722456789', hostel:'Magadi Hostels', avatar:'https://randomuser.me/api/portraits/men/32.jpg', verified:true, role:'student', rating:4.8, reviews:89, joined:now-180*D, bio:'Gadgets & accessories. All phones tested, receipts available.'},
+    {id:'u3', name:'Dennis Ole Sankok', email:'dennis@mmu.ac.ke', pass:'demo1234', phone:'254733567890', hostel:'Campus Gate', avatar:'https://randomuser.me/api/portraits/men/75.jpg', verified:true, role:'student', rating:5.0, reviews:210, joined:now-300*D, bio:'Sharp fades & dreads. Walk-ins at the Gate container.'},
+    {id:'u4', name:'Mercy Cherono', email:'mercy@mmu.ac.ke', pass:'demo1234', phone:'254744678901', hostel:'Ole Ntimama', avatar:'https://randomuser.me/api/portraits/women/44.jpg', verified:true, role:'student', rating:4.9, reviews:167, joined:now-150*D, bio:'Home baking — cakes, pilau Fridays, samosas daily.'},
+    {id:'u5', name:'Kevin Mwangi', email:'kevin@mmu.ac.ke', pass:'demo1234', phone:'254755789012', hostel:'Lenana Hostels', avatar:'https://randomuser.me/api/portraits/men/22.jpg', verified:true, role:'student', rating:4.7, reviews:64, joined:now-120*D, bio:'Laptops, repairs & printing. TechFix Narok founder.'},
+    {id:'u6', name:'Naserian Simaloi', email:'naserian@mmu.ac.ke', pass:'demo1234', phone:'254766890123', hostel:'Narok Town', avatar:'https://randomuser.me/api/portraits/women/68.jpg', verified:false, role:'student', rating:4.8, reviews:41, joined:now-60*D, bio:'Handmade Maasai beadwork & art commissions.'},
+    {id:'u7', name:'Ian Kiprop', email:'ian@mmu.ac.ke', pass:'demo1234', phone:'254777901234', hostel:'Magadi Hostels', avatar:'https://randomuser.me/api/portraits/men/41.jpg', verified:true, role:'student', rating:4.9, reviews:98, joined:now-90*D, bio:'Photography — graduation shoots, events, portraits.'},
+    {id:'admin', name:'Mara Admin', email:'admin@mmu.ac.ke', pass:'mara2026', phone:'254700000000', hostel:'Student Centre', avatar:'https://ui-avatars.com/api/?name=Mara+Admin&background=0b3b2e&color=fff', verified:true, role:'admin', rating:5.0, reviews:0, joined:now-400*D, bio:'Marketplace moderation team.'},
+  ];
+  const P=(id,title,price,category,condition,sellerId,location,images,desc,extra={})=>Object.assign({id,title,price,category,condition,sellerId,location,images,description:desc,negotiable:true,sold:false,featured:false,views:100+Math.floor(Math.random()*900),likes:5+Math.floor(Math.random()*120),createdAt:now-Math.floor(Math.random()*10)*D-Math.floor(Math.random()*20)*H},extra);
+  const products=[
+    P('p1','Vintage Oversized Denim Jacket — Thrift',850,'fashion','Like New','u1','Library Square',['https://images.unsplash.com/photo-1576995853123-5a10305d93c0?w=700&q=80&auto=format&fit=crop','https://images.unsplash.com/photo-1551537482-f2075a1d41f2?w=700&q=80&auto=format&fit=crop'],'Heavy-quality vintage denim, size M/L. Washed & ironed. Only worn twice. First come, first served — Friday drop leftovers.',{featured:true,views:1840,likes:214,createdAt:now-2*H}),
+    P('p2','Nike Air Force 1 ‘07 White — Size 43',3800,'shoes','Like New','u1','Kilgoris Hostels',['https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=700&q=80&auto=format&fit=crop','https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=700&q=80&auto=format&fit=crop'],'Original AF1, worn 3 times. Box available. No creases. Price slightly negotiable for serious buyer.',{featured:true,views:2310,likes:298,createdAt:now-5*H}),
+    P('p3','iPhone 11 · 128GB · BH 89%',32500,'phones','Used','u2','Magadi Hostels',['https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=700&q=80&auto=format&fit=crop','https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=700&q=80&auto=format&fit=crop'],'Face ID ✓ True Tone ✓ Battery 89%. Comes with case + tempered glass. Receipt from iHub Narok available. No swap.',{featured:true,views:3120,likes:342,createdAt:now-8*H}),
+    P('p4','HP EliteBook 840 G6 · i5 · 8/256 SSD',28500,'electronics','Refurbished','u5','Lenana Hostels',['https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=700&q=80&auto=format&fit=crop','https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=700&q=80&auto=format&fit=crop'],'Perfect for CPA / IT students. 14" FHD, backlit keyboard, 6hrs battery. Free laptop bag + wireless mouse.',{featured:true,views:1980,likes:187,createdAt:now-1*D}),
+    P('p5','JBL Flip 5 — Brand New Sealed',9500,'electronics','New','u2','Student Centre',['https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=700&q=80&auto=format&fit=crop'],'Sealed in box with warranty card. Deep bass, 12hr playtime. Ideal for hostel parties. Fixed price.',{views:940,likes:112,createdAt:now-1*D-4*H}),
+    P('p6','Friday Pilau + 2 Samosas + Kachumbari',150,'food','New','u4','Ole Ntimama',['https://images.unsplash.com/photo-1601050690597-df0568f70950?w=700&q=80&auto=format&fit=crop','https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=700&q=80&auto=format&fit=crop'],'Hot lunch every Friday 12–2pm outside Ole Ntimama. Pre-order on WhatsApp to reserve. Bulk orders for groups welcome!',{views:2760,likes:401,createdAt:now-3*H,featured:true}),
+    P('p7','Shein Crop Tops Bundle (3 pcs) — S/M',1200,'fashion','New','u1','Kilgoris Hostels',['https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=700&q=80&auto=format&fit=crop'],'3 brand-new crop tops, never worn. Sizes S/M. Selling as bundle only. DM for live photos.',{views:720,likes:98,createdAt:now-2*D}),
+    P('p8','Oraimo FreePods 4 + 20000mAh Powerbank Combo',4500,'phones','New','u2','Campus Gate',['https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=700&q=80&auto=format&fit=crop','https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?w=700&q=80&auto=format&fit=crop'],'Oraimo buds (ENC, 36hr) + Oraimo 20000mAh fast-charge bank. Both sealed. Combo saves you 800 bob.',{views:1130,likes:145,createdAt:now-2*D-5*H}),
+    P('p9','Custom Birthday Cakes from KSh 1,800',1800,'food','New','u4','Narok Town',['https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=700&q=80&auto=format&fit=crop','https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=700&q=80&auto=format&fit=crop'],'1kg cakes from 1800, cupcakes 6-pack 600. Order 48hrs ahead. Delivery to hostels free on weekends.',{views:1620,likes:233,createdAt:now-3*D}),
+    P('p10','Knotless Braids + Labour — House Calls',2500,'beauty','New','u6','Magadi Hostels',['https://images.unsplash.com/photo-1522337660859-02fbefca4702?w=700&q=80&auto=format&fit=crop'],'Mid-back knotless 2500 labour only (with your braids) / 3500 with my hair. Neat & fast, 4hrs max. House calls in all hostels.',{views:1890,likes:276,createdAt:now-6*H}),
+    P('p11','CPA / Business Notes Bundle + Past Papers',500,'books','Used','u5','Library Square',['https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=700&q=80&auto=format&fit=crop'],'Photocopied + highlighted notes for Year 1–2 Business. Includes KASNEB past papers with answers. PDF also available.',{views:640,likes:71,createdAt:now-4*D}),
+    P('p12','Single Room Vacancy — Magadi (Next to Tarmac)',4500,'hostel','Used','u2','Magadi Hostels',['https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?w=700&q=80&auto=format&fit=crop','https://images.unsplash.com/photo-1555854877-bab0e564b8d5?w=700&q=80&auto=format&fit=crop'],'Spacious single, token meter, WiFi available, 5 min to gate. Deposit 4500. Viewing Sat/Sun with caretaker. Ladies wing available too.',{views:2540,likes:189,createdAt:now-12*H,featured:true}),
+    P('p13','Solid Wood Study Desk + Chair',5500,'furniture','Used','u5','Lenana Hostels',['https://images.unsplash.com/photo-1592078615290-033ee584e267?w=700&q=80&auto=format&fit=crop'],'Strong hardwood desk (120cm) + cushioned chair. Perfect for finalists. Buyer arranges pickup — I’ll help carry!',{views:810,likes:66,createdAt:now-5*D}),
+    P('p14','Handmade Maasai Bead Bracelets (Set of 5)',350,'art','New','u6','Narok Town',['https://images.unsplash.com/photo-1611085583191-a3b181a88401?w=700&q=80&auto=format&fit=crop','https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=700&q=80&auto=format&fit=crop'],'Authentic beadwork by local mamas. Wholesale for events/graduations. Custom name bracelets 150 each.',{views:980,likes:158,createdAt:now-1*D-2*H}),
+    P('p15','Clean Fade + Dread Retouch — Gate Container',300,'services','New','u3','Campus Gate',['https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=700&q=80&auto=format&fit=crop','https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=700&q=80&auto=format&fit=crop'],'Student discount: fade 300, dread retouch 500, designs +100. Open Mon–Sun 9am–8pm. No queue if you book on WhatsApp.',{views:2210,likes:324,createdAt:now-9*H,featured:true}),
+    P('p16','Sony WH-1000XM4 Noise Cancelling',18500,'electronics','Like New','u5','Student Centre',['https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=700&q=80&auto=format&fit=crop'],'Best for library sessions. Pads replaced last month. Box + cable + case included. Fixed — kamenuka bei usiniulize.',{views:1290,likes:173,createdAt:now-3*D-3*H}),
+    P('p17','Adidas Samba OG — Size 42 (New)',4200,'shoes','New','u1','Kilgoris Hostels',['https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=700&q=80&auto=format&fit=crop'],'Factory sambas, top quality. Sizes 40–44 available on order. Come fitting at Kilgoris Block C.',{views:1540,likes:201,createdAt:now-20*H}),
+    P('p18','2-Burner Gas Cooker + 6kg Cylinder (Refillable)',6800,'hostel','Used','u4','Ole Ntimama',['https://images.unsplash.com/photo-1584267385494-9fdd9a71ad75?w=700&q=80&auto=format&fit=crop'],'Cylinder half-full gas. No leaks, tested. Ideal for shared rooms. Price negotiable if you pick today.',{views:870,likes:74,createdAt:now-6*D}),
+    P('p19','Samsung Galaxy A32 + Fast Charger',13500,'phones','Used','u2','Narok Town',['https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=700&q=80&auto=format&fit=crop'],'6.4" AMOLED, 5000mAh, 64GB. Small crack on protector only — screen perfect. Box + receipt.',{views:1420,likes:132,createdAt:now-4*D-6*H}),
+    P('p20','Acrylic Portrait Commission — A4/A3',1500,'art','New','u7','Student Centre',['https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=700&q=80&auto=format&fit=crop','https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=700&q=80&auto=format&fit=crop'],'Graduation gift plug 🎓 A4 1500, A3 2500. 3-day turnaround. Deposit 50%. Check IG @lensbykiprop for samples.',{views:760,likes:141,createdAt:now-2*D-8*H}),
+    P('p21','Mountain Bike — 26" (Campus Errands Beast)',12000,'other','Used','u3','Campus Gate',['https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=700&q=80&auto=format&fit=crop'],'Serviced, new brakes + bell. Perfect Narok terrain. Lock + pump included free.',{views:690,likes:58,createdAt:now-7*D}),
+    P('p22','Full Glam Makeup + Lashes (House Call)',800,'beauty','New','u6','Kilgoris Hostels',['https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=700&q=80&auto=format&fit=crop'],'Soft glam 800, full glam 1200. I come to you. Graduation packages for groups of 3+.',{views:1180,likes:196,createdAt:now-14*H}),
+    P('p23','Graduation Photoshoot — 20 Edited Pics',2500,'services','New','u7','Library Square',['https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=700&q=80&auto=format&fit=crop'],'Gown + cap provided. 20 edited + all raw on drive. Same-day preview. Book your December slot early!',{views:1340,likes:188,createdAt:now-1*D-8*H}),
+    P('p24','Ankara Hoodie — Custom Made',1800,'fashion','New','u1','Narok Town',['https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=700&q=80&auto=format&fit=crop'],'Warm fleece hoodies with ankara lining. All sizes. Name embroidery +300. 2-day tailoring.',{views:590,likes:87,createdAt:now-8*D}),
+  ];
+  const businesses=[
+    {id:'b1', name:"Faith's Thrift House", ownerId:'u1', cover:'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&q=80&auto=format&fit=crop', logo:'https://randomuser.me/api/portraits/women/65.jpg', category:'Fashion', rating:4.9, followers:842, location:'Kilgoris · Block C', phone:'254712345678', verified:true, description:'Curated mitumba drops every Friday. Deni, hoodies, sambas & more.'},
+    {id:'b2', name:'Sharp Cuts by Ole', ownerId:'u3', cover:'https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=800&q=80&auto=format&fit=crop', logo:'https://randomuser.me/api/portraits/men/75.jpg', category:'Services', rating:5.0, followers:1204, location:'Campus Gate Container', phone:'254733567890', verified:true, description:'Fades, dreads, designs. The official MMU barber since 2023.'},
+    {id:'b3', name:'Naliaka Bakes', ownerId:'u4', cover:'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=800&q=80&auto=format&fit=crop', logo:'https://randomuser.me/api/portraits/women/44.jpg', category:'Food & Snacks', rating:4.9, followers:967, location:'Ole Ntimama', phone:'254744678901', verified:true, description:'Cakes, pilau Fridays & daily samosas. Bulk orders welcome.'},
+    {id:'b4', name:'Lens by Kiprop', ownerId:'u7', cover:'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=800&q=80&auto=format&fit=crop', logo:'https://randomuser.me/api/portraits/men/41.jpg', category:'Art & Creative', rating:4.9, followers:623, location:'Library Square', phone:'254777901234', verified:true, description:'Graduation & event photography. Portraits that slap.'},
+    {id:'b5', name:'TechFix Narok', ownerId:'u5', cover:'https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=800&q=80&auto=format&fit=crop', logo:'https://randomuser.me/api/portraits/men/22.jpg', category:'Electronics', rating:4.7, followers:418, location:'Lenana Hostels', phone:'254755789012', verified:true, description:'Laptop sales, phone repairs, printing & accessories.'},
+    {id:'b6', name:'Beads by Naserian', ownerId:'u6', cover:'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800&q=80&auto=format&fit=crop', logo:'https://randomuser.me/api/portraits/women/68.jpg', category:'Art & Creative', rating:4.8, followers:305, location:'Narok Town', phone:'254766890123', verified:false, description:'Authentic Maasai beadwork & custom glam makeup.'},
+  ];
+  const messages=[
+    {id:'m1', fromId:'u2', toId:'u1', productId:'p2', body:'Hi Faith! Is the AF1 size 43 still available? Can I fit today evening?', createdAt:now-3*H},
+    {id:'m2', fromId:'u1', toId:'u2', productId:'p2', body:'Hi Brian! Yes available 😊 I’m at Kilgoris Block C. Come from 5pm?', createdAt:now-2*H-40*60000},
+    {id:'m3', fromId:'u4', toId:'u2', productId:'p3', body:'Hello, does the iPhone come with warranty? Can we meet at Student Centre tomorrow?', createdAt:now-5*H},
+  ];
+  return {users, products, businesses, favorites:[{userId:'u2',productId:'p1'},{userId:'u2',productId:'p6'},{userId:'u2',productId:'p15'}], messages, reports:[{id:'r1', productId:'p19', reporterId:'u4', reason:'Suspicious price', note:'Price changed twice', status:'open', createdAt:now-1*D}], follows:['b1','b3']};
+}
+function loadDB(){ try{ const raw=localStorage.getItem(LS_KEY); if(raw) return JSON.parse(raw);}catch(e){} const d=seedDB(); localStorage.setItem(LS_KEY, JSON.stringify(d)); return d; }
+function saveDB(){ localStorage.setItem(LS_KEY, JSON.stringify(DB)); }
+let DB = loadDB();
+function currentUser(){ try{ const id=localStorage.getItem(LS_SES); if(!id) return null; return DB.users.find(u=>u.id===id)||null; }catch(e){ return null; } }
+function setSession(id){ if(id) localStorage.setItem(LS_SES,id); else localStorage.removeItem(LS_SES); }
+
+/* ---------- HELPERS ---------- */
+const $=id=>document.getElementById(id);
+const fmtK=n=>'KSh '+Number(n).toLocaleString('en-KE');
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const catById=id=>CATEGORIES.find(c=>c.id===id)||CATEGORIES[11];
+const sellerOf=p=>DB.users.find(u=>u.id===p.sellerId)||DB.users[0];
+function timeAgo(t){ const s=(Date.now()-t)/1000; if(s<60) return 'just now'; if(s<3600) return Math.floor(s/60)+'m ago'; if(s<86400) return Math.floor(s/3600)+'h ago'; if(s<86400*7) return Math.floor(s/86400)+'d ago'; return new Date(t).toLocaleDateString('en-KE',{day:'numeric',month:'short'}); }
+function isFav(pid){ const u=currentUser(); if(!u) return false; return DB.favorites.some(f=>f.userId===u.id&&f.productId===pid); }
+function toast(msg, type='ok'){ const colors={ok:'bg-mara-800',warn:'bg-amber-500',err:'bg-red-600',wa:'bg-emerald-600'}; const icons={ok:'fa-circle-check',warn:'fa-triangle-exclamation',err:'fa-circle-xmark',wa:'fa-brands fa-whatsapp'}; const el=document.createElement('div'); el.className=`toast-in ${colors[type]} text-white text-[13px] font-bold px-5 py-3 rounded-2xl shadow-pop flex items-center gap-2.5 max-w-[92vw]`; el.innerHTML=`<i class="fa-solid ${icons[type]}"></i><span>${msg}</span>`; $('toasts').appendChild(el); setTimeout(()=>{el.style.transition='all .4s'; el.style.opacity='0'; el.style.transform='translateY(10px)'; setTimeout(()=>el.remove(),400);},2600); }
+function openModal(id){ $(id).classList.remove('hidden'); document.body.style.overflow='hidden'; }
+function closeModal(id){ $(id).classList.add('hidden'); document.body.style.overflow=''; }
+function waLink(phone, text){ const p=String(phone).replace(/\D/g,''); return `https://wa.me/${p}?text=${encodeURIComponent(text)}`; }
+
+/* ---------- ROUTER ---------- */
+let activeView='home', exploreState={q:'', cat:'all', conds:[], max:50000, loc:'', sort:'newest', verifiedOnly:false, availOnly:true}, currentProductId=null, currentSellerId=null, activeChat=null, sellDraft={step:1, images:[]}, adminTab='overview';
+
+function navigate(view, param){
+  ['home','explore','product','seller','saved','messages','sell','profile','admin','businesses'].forEach(v=>$('view-'+v).classList.add('hidden'));
+  $('view-'+view).classList.remove('hidden'); activeView=view;
+  document.querySelectorAll('.navlink').forEach(b=>{ b.classList.toggle('bg-mara-800', b.dataset.nav===view); b.classList.toggle('text-white', b.dataset.nav===view); });
+  document.querySelectorAll('.mnav').forEach(b=>{ const on=b.dataset.nav===view; b.classList.toggle('text-mara-800',on); b.classList.toggle('text-mara-800/45',!on); });
+  window.scrollTo({top:0, behavior:'smooth'});
+  if(view==='home') renderHome();
+  if(view==='explore'){ if(param==='trending'){exploreState.sort='trending';} if(param==='newest'){exploreState.sort='newest'; exploreState.cat='all';} renderExplore(); }
+  if(view==='product') renderProductDetail(currentProductId);
+  if(view==='seller') renderSeller(currentSellerId);
+  if(view==='saved') renderSaved();
+  if(view==='messages') renderMessages();
+  if(view==='sell') renderSell();
+  if(view==='profile') renderProfile();
+  if(view==='admin') renderAdmin();
+  if(view==='businesses') renderBusinesses();
+  updateBadges();
+}
+function openProduct(id){ const p=DB.products.find(x=>x.id===id); if(!p) return; p.views=(p.views||0)+1; saveDB(); currentProductId=id; navigate('product'); }
+function openSeller(id){ currentSellerId=id; navigate('seller'); }
+function doGlobalSearch(q){ exploreState.q=(q||'').trim(); exploreState.cat='all'; navigate('explore'); }
+function goSell(){ if(!currentUser()){ openModal('authModal'); switchAuth('signup'); toast('Create a free student account to sell','warn'); return; } sellDraft={step:1,images:[]}; navigate('sell'); }
+
+/* ---------- PRODUCT CARD ---------- */
+function verifiedBadge(sm=true){ return `<span class="verified-tick ${sm?'w-[16px] h-[16px] text-[9px]':'w-5 h-5 text-[11px]'} rounded-full inline-flex items-center justify-center shrink-0" title="MMU Verified"><i class="fa-solid fa-check"></i></span>`; }
+function productCard(p){
+  const s=sellerOf(p), cat=catById(p.category), fav=isFav(p.id);
+  const condColor = p.condition==='New'?'bg-emerald-100 text-emerald-700':p.condition==='Like New'?'bg-mara-50 text-mara-700':p.condition==='Refurbished'?'bg-violet-100 text-violet-700':'bg-amber-100 text-amber-700';
+  return `
+  <div class="bg-white rounded-[20px] overflow-hidden border border-[#f0e9db] shadow-card card-hover cursor-pointer relative group" onclick="openProduct('${p.id}')">
+    ${p.sold?`<div class="absolute top-3 left-3 z-10 bg-ink/85 backdrop-blur text-white text-[11px] font-extrabold px-3 py-1.5 rounded-full">SOLD</div>`:p.featured?`<div class="absolute top-3 left-3 z-10 bg-gradient-to-r from-ember-500 to-ember-600 text-white text-[10.5px] font-extrabold px-3 py-1.5 rounded-full shadow">FEATURED</div>`:''}
+    <div class="relative overflow-hidden aspect-[1/1] bg-[#f1ede6]">
+      <img src="${p.images[0]}" onerror="this.src='https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600&q=80&auto=format&fit=crop'" loading="lazy" class="p-img w-full h-full object-cover ${p.sold?'grayscale opacity-70':''}"/>
+      <button onclick="event.stopPropagation(); toggleFav('${p.id}')" class="fav-btn ${fav?'active':''} absolute top-2.5 right-2.5 w-9 h-9 rounded-full bg-white/95 backdrop-blur border border-black/5 flex items-center justify-center text-mara-800 shadow" title="Save"><i class="fa-${fav?'solid':'regular'} fa-heart text-[15px]"></i></button>
+      <span class="absolute bottom-2.5 left-2.5 text-[10.5px] font-extrabold px-2.5 py-1 rounded-full ${condColor}">${esc(p.condition).toUpperCase()}</span>
+    </div>
+    <div class="p-3 md:p-4">
+      <div class="flex items-center gap-1.5 text-[11px] font-bold text-mara-800/45 mb-1"><span style="color:${cat.color}">${cat.icon}</span><span class="uppercase tracking-wide">${esc(cat.name)}</span><span class="ml-auto flex items-center gap-1"><i class="fa-regular fa-eye"></i>${p.views>1000?(p.views/1000).toFixed(1)+'k':p.views}</span></div>
+      <h3 class="font-bold text-[13.5px] md:text-[15px] leading-snug line-clamp-2 min-h-[38px] md:min-h-[44px]">${esc(p.title)}</h3>
+      <div class="font-sora font-extrabold text-mara-800 text-[16px] md:text-[18px] mt-1 price-tag">${fmtK(p.price)} ${p.negotiable&&!p.sold?'<span class="text-[10.5px] font-bold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded-md ml-1 align-middle">NEG.</span>':''}</div>
+      <div class="flex items-center gap-1.5 mt-2 text-[11.5px] md:text-[12px] text-mara-800/50 font-semibold"><i class="fa-solid fa-location-dot text-ember-500 text-[11px]"></i><span class="truncate">${esc(p.location)}</span></div>
+      <div class="flex items-center gap-2 mt-2.5 pt-2.5 border-t border-dashed border-[#ece6da]" onclick="event.stopPropagation(); openSeller('${s.id}')">
+        <img src="${s.avatar}" class="w-6 h-6 rounded-full object-cover" onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(s.name)}&background=0b3b2e&color=fff'"/>
+        <span class="text-[12px] font-bold truncate">${esc(s.name.split(' ')[0])} ${esc(s.name.split(' ')[1]||'')}</span>${s.verified?verifiedBadge():''}
+        <span class="ml-auto text-[11px] font-semibold text-mara-800/40">${timeAgo(p.createdAt)}</span>
+      </div>
+    </div>
+  </div>`;
+}
+
+/* ---------- HOME ---------- */
+function renderHome(){
+  $('homeCategories').innerHTML = CATEGORIES.map(c=>{
+    const count = DB.products.filter(p=>p.category===c.id&&!p.sold).length;
+    return `<button onclick="exploreState.cat='${c.id}';exploreState.q='';navigate('explore')" class="bg-white border border-[#f0e9db] rounded-2xl p-2.5 md:p-4 flex flex-col items-center gap-1.5 card-hover shadow-sm">
+      <span class="w-10 h-10 md:w-12 md:h-12 rounded-2xl flex items-center justify-center text-[20px] md:text-[24px]" style="background:${c.color}15">${c.icon}</span>
+      <span class="text-[10.5px] md:text-[12px] font-extrabold leading-tight text-center">${c.name}</span>
+      <span class="text-[10px] font-bold text-mara-800/40">${count} items</span></button>`;
+  }).join('');
+  const avail = DB.products.filter(p=>!p.sold);
+  const trending=[...avail].sort((a,b)=>b.views-a.views).slice(0,4);
+  const recent=[...DB.products].sort((a,b)=>b.createdAt-a.createdAt).slice(0,4);
+  const popular=[...avail].sort((a,b)=>b.likes-a.likes).slice(0,4);
+  $('trendingGrid').innerHTML=trending.map(productCard).join('');
+  $('recentGrid').innerHTML=recent.map(productCard).join('');
+  $('popularGrid').innerHTML=popular.map(productCard).join('');
+  $('homeBusinesses').innerHTML=DB.businesses.slice(0,3).map(bizCard).join('');
+  $('heroQuickTags').innerHTML=['Air Force','iPhone 11','Single room','Braids','Pilau','Laptop'].map(t=>`<button onclick="doGlobalSearch('${t}')" class="bg-white/10 hover:bg-white/20 border border-white/15 backdrop-blur text-white/85 text-[12px] font-bold px-3.5 py-1.5 rounded-full transition">${t}</button>`).join('');
+  $('marquee').innerHTML=(`<span>🔥 800+ live listings</span><span>·</span><span>Verified @mmu.ac.ke sellers only</span><span>·</span><span>Meet at Library Square</span><span>·</span><span>0% commission</span><span>·</span><span>M-Pesa ready</span><span>·</span>`).repeat(4);
+  $('heroAvatars').innerHTML=DB.users.slice(0,4).map(u=>`<img src="${u.avatar}" class="w-8 h-8 rounded-full border-2 border-white object-cover"/>`).join('');
+  $('statListings').textContent=DB.products.filter(p=>!p.sold).length*37+'+';
+  renderAuthAreas();
+}
+function bizCard(b){
+  const following = DB.follows.includes(b.id);
+  return `<div class="min-w-[280px] md:min-w-0 bg-white rounded-3xl overflow-hidden border border-[#f0e9db] shadow-card card-hover">
+    <div class="relative h-[110px]"><img src="${b.cover}" class="w-full h-full object-cover"/><div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+    <img src="${b.logo}" class="absolute -bottom-6 left-4 w-14 h-14 rounded-2xl object-cover border-[3px] border-white shadow"/></div>
+    <div class="p-4 pt-8"><div class="flex items-center gap-1.5 font-sora font-bold text-[15px]">${esc(b.name)} ${b.verified?verifiedBadge():''}</div>
+    <div class="text-[12px] font-semibold text-mara-800/50 flex items-center gap-1.5 mt-0.5"><i class="fa-solid fa-location-dot text-ember-500"></i>${esc(b.location)} · ⭐ ${b.rating} · ${(b.followers/1000).toFixed(1)}k</div>
+    <p class="text-[12.5px] text-mara-800/60 font-medium mt-2 line-clamp-2">${esc(b.description)}</p>
+    <div class="flex gap-2 mt-3"><button onclick="openSeller('${b.ownerId}')" class="flex-1 bg-mara-800 text-white text-[12.5px] font-bold py-2.5 rounded-full hover:bg-mara-700 transition">Visit shop</button><button onclick="toggleFollow('${b.id}')" class="px-4 py-2.5 rounded-full text-[12.5px] font-bold border transition ${following?'bg-mara-50 border-mara-200 text-mara-700':'border-[#e5ddd0] text-mara-800'}">${following?'Following':'Follow'}</button></div></div></div>`;
+}
+function toggleFollow(id){ const i=DB.follows.indexOf(id); if(i>=0) DB.follows.splice(i,1); else DB.follows.push(id); saveDB(); toast(i>=0?'Unfollowed':'Following business ✓'); renderHome(); if(activeView==='businesses') renderBusinesses(); }
+
+/* ---------- EXPLORE ---------- */
+function renderExplore(){
+  $('exploreSearch').value=exploreState.q||'';
+  $('exploreSort').value=exploreState.sort;
+  $('exploreCats').innerHTML=[{id:'all',name:'All',icon:'✨'},...CATEGORIES].map(c=>`<button onclick="exploreState.cat='${c.id}';renderExplore()" class="chip shrink-0 flex items-center gap-1.5 text-[12.5px] font-bold px-4 py-2 rounded-full border border-[#e5ddd0] bg-white ${exploreState.cat===c.id?'active':''}">${c.icon} ${c.name}</button>`).join('');
+  $('condFilters').innerHTML=CONDS.map(c=>`<button onclick="toggleCond('${c}')" class="chip text-[12px] font-bold px-3.5 py-1.5 rounded-full border border-[#e5ddd0] bg-[#f6f2ea] ${exploreState.conds.includes(c)?'active':''}">${c}</button>`).join('');
+  const locSel=$('locFilter'); if(locSel.options.length<=1){ LOCATIONS.forEach(l=>{const o=document.createElement('option');o.value=l;o.textContent=l;locSel.appendChild(o);}); } locSel.value=exploreState.loc;
+  $('priceRange').value=exploreState.max; $('priceLabel').textContent='KSh '+Number(exploreState.max).toLocaleString();
+  $('verifiedOnly').checked=exploreState.verifiedOnly; $('availOnly').checked=exploreState.availOnly;
+  applyExplore();
+}
+function toggleCond(c){ const i=exploreState.conds.indexOf(c); if(i>=0)exploreState.conds.splice(i,1); else exploreState.conds.push(c); renderExplore(); }
+function clearFilters(){ exploreState={q:'',cat:'all',conds:[],max:50000,loc:'',sort:'newest',verifiedOnly:false,availOnly:true}; renderExplore(); }
+function toggleMobileFilters(){ $('filterPanel').classList.toggle('hidden'); }
+function applyExplore(){
+  exploreState.q=$('exploreSearch')?$('exploreSearch').value:exploreState.q;
+  exploreState.sort=$('exploreSort')?$('exploreSort').value:exploreState.sort;
+  exploreState.loc=$('locFilter')?$('locFilter').value:exploreState.loc;
+  exploreState.max=$('priceRange')?Number($('priceRange').value):exploreState.max;
+  exploreState.verifiedOnly=$('verifiedOnly')?$('verifiedOnly').checked:false;
+  exploreState.availOnly=$('availOnly')?$('availOnly').checked:true;
+  let list=[...DB.products];
+  const q=exploreState.q.toLowerCase().trim();
+  if(q){ list=list.filter(p=> (p.title+' '+p.description+' '+sellerOf(p).name+' '+p.location+' '+catById(p.category).name).toLowerCase().includes(q)); }
+  if(exploreState.cat!=='all') list=list.filter(p=>p.category===exploreState.cat);
+  if(exploreState.conds.length) list=list.filter(p=>exploreState.conds.includes(p.condition));
+  list=list.filter(p=>p.price<=exploreState.max);
+  if(exploreState.loc) list=list.filter(p=>p.location===exploreState.loc);
+  if(exploreState.verifiedOnly) list=list.filter(p=>sellerOf(p).verified);
+  if(exploreState.availOnly) list=list.filter(p=>!p.sold);
+  if(exploreState.sort==='newest') list.sort((a,b)=>b.createdAt-a.createdAt);
+  if(exploreState.sort==='low') list.sort((a,b)=>a.price-b.price);
+  if(exploreState.sort==='high') list.sort((a,b)=>b.price-a.price);
+  if(exploreState.sort==='popular') list.sort((a,b)=>b.likes-a.likes);
+  if(exploreState.sort==='trending') list.sort((a,b)=>b.views-a.views);
+  $('exploreCount').innerHTML=`<span class="text-mara-800 font-extrabold">${list.length}</span> result${list.length!==1?'s':''} ${exploreState.q?`for “<span class="text-ember-600">${esc(exploreState.q)}</span>”`:''}`;
+  $('exploreGrid').innerHTML=list.map(productCard).join('');
+  $('exploreEmpty').classList.toggle('hidden', list.length>0);
+  $('exploreGrid').classList.toggle('hidden', list.length===0);
+}
+
+/* ---------- PRODUCT DETAIL ---------- */
+let galleryIdx=0;
+function renderProductDetail(id){
+  const p=DB.products.find(x=>x.id===id)||DB.products[0]; currentProductId=p.id;
+  const s=sellerOf(p), cat=catById(p.category), me=currentUser(), isOwner=me&&me.id===p.sellerId;
+  const fav=isFav(p.id);
+  const similar=DB.products.filter(x=>x.category===p.category&&x.id!==p.id).slice(0,4);
+  galleryIdx=0;
+  $('productDetailWrap').innerHTML=`
+  <button onclick="navigate('explore')" class="flex items-center gap-2 text-[13px] font-bold text-mara-800/60 hover:text-mara-800 mb-4"><span class="w-8 h-8 rounded-full bg-white border border-[#ece6da] flex items-center justify-center"><i class="fa-solid fa-arrow-left"></i></span> Back to market</button>
+  <div class="grid lg:grid-cols-[1.05fr_.95fr] gap-5 md:gap-8 items-start">
+    <div>
+      <div class="relative bg-white rounded-[24px] overflow-hidden border border-[#ece6da] shadow-card">
+        ${p.sold?'<div class="absolute top-4 left-4 z-10 bg-ink text-white text-[12px] font-extrabold px-4 py-2 rounded-full">SOLD OUT</div>':''}
+        <img id="galMain" src="${p.images[0]}" onclick="openLightbox('${p.images[0]}')" class="w-full aspect-[1/1] md:aspect-[4/3.4] object-cover cursor-zoom-in ${p.sold?'grayscale':''}"/>
+        ${p.images.length>1?`<button onclick="galMove(-1,'${p.id}')" class="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 backdrop-blur flex items-center justify-center shadow"><i class="fa-solid fa-chevron-left"></i></button><button onclick="galMove(1,'${p.id}')" class="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 backdrop-blur flex items-center justify-center shadow"><i class="fa-solid fa-chevron-right"></i></button>`:''}
+        <button onclick="toggleFav('${p.id}');renderProductDetail('${p.id}')" class="fav-btn ${fav?'active':''} absolute top-4 right-4 h-11 px-4 rounded-full bg-white/95 backdrop-blur border flex items-center gap-2 text-[13px] font-bold shadow"><i class="fa-${fav?'solid':'regular'} fa-heart"></i> ${fav?'Saved':'Save'}</button>
+      </div>
+      <div class="flex gap-2.5 mt-3">${p.images.map((im,i)=>`<img src="${im}" onclick="galSet(${i},'${p.id}')" id="thumb${i}" class="w-[72px] h-[72px] rounded-2xl object-cover cursor-pointer border-[3px] transition ${i===0?'border-mara-800':'border-transparent opacity-60'}"/>`).join('')}</div>
+      <div class="hidden md:grid grid-cols-3 gap-3 mt-4">
+        <div class="bg-white rounded-2xl border border-[#ece6da] p-3.5 text-center"><i class="fa-solid fa-location-dot text-ember-500"></i><div class="text-[12px] font-extrabold mt-1">${esc(p.location)}</div><div class="text-[11px] text-mara-800/45 font-semibold">Meet-up area</div></div>
+        <div class="bg-white rounded-2xl border border-[#ece6da] p-3.5 text-center"><i class="fa-solid fa-shield-halved text-mara-600"></i><div class="text-[12px] font-extrabold mt-1">${s.verified?'MMU Verified':'Unverified'}</div><div class="text-[11px] text-mara-800/45 font-semibold">${esc(s.email)}</div></div>
+        <div class="bg-white rounded-2xl border border-[#ece6da] p-3.5 text-center"><i class="fa-regular fa-eye text-gold-500"></i><div class="text-[12px] font-extrabold mt-1">${p.views.toLocaleString()} views</div><div class="text-[11px] text-mara-800/45 font-semibold">${p.likes} saves</div></div>
+      </div>
+    </div>
+    <div>
+      <div class="flex items-center gap-2 flex-wrap"><span class="text-[11.5px] font-extrabold px-3 py-1.5 rounded-full" style="background:${cat.color}15;color:${cat.color}">${cat.icon} ${cat.name.toUpperCase()}</span><span class="text-[11.5px] font-extrabold px-3 py-1.5 rounded-full bg-[#f1ede6] text-mara-800">${esc(p.condition).toUpperCase()}</span><span class="text-[11.5px] font-semibold text-mara-800/40">· ${timeAgo(p.createdAt)}</span></div>
+      <h1 class="font-sora font-extrabold text-[24px] md:text-[32px] leading-tight tracking-tight mt-3">${esc(p.title)}</h1>
+      <div class="flex items-end gap-3 mt-2"><div class="font-sora font-extrabold text-[30px] md:text-[36px] text-mara-800 price-tag">${fmtK(p.price)}</div>${p.negotiable&&!p.sold?'<span class="mb-2 text-[12px] font-extrabold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full">Negotiable</span>':''}</div>
+      <p class="text-[14px] text-mara-800/60 font-medium leading-relaxed mt-3">${esc(p.description)}</p>
+      <div class="bg-white rounded-3xl border border-[#ece6da] shadow-card p-4 md:p-5 mt-5">
+        <div class="flex items-center gap-3 cursor-pointer" onclick="openSeller('${s.id}')">
+          <img src="${s.avatar}" class="w-14 h-14 rounded-2xl object-cover" onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(s.name)}&background=0b3b2e&color=fff'"/>
+          <div class="flex-1 min-w-0"><div class="flex items-center gap-1.5 font-sora font-bold text-[15.5px]">${esc(s.name)} ${s.verified?verifiedBadge(false):''}</div>
+          <div class="text-[12px] font-semibold text-mara-800/50">⭐ ${s.rating} (${s.reviews} reviews) · 📍 ${esc(s.hostel)} · <span class="text-emerald-600">● replies ~8 min</span></div></div>
+          <i class="fa-solid fa-chevron-right text-mara-800/30"></i>
+        </div>
+        ${isOwner?`
+        <div class="grid grid-cols-2 gap-2 mt-4">
+          <button onclick="toggleSold('${p.id}')" class="py-3 rounded-2xl font-extrabold text-[13.5px] ${p.sold?'bg-mara-800 text-white':'bg-gold-400 text-mara-900'}">${p.sold?'Re-list item':'Mark as sold'}</button>
+          <button onclick="deleteProduct('${p.id}')" class="py-3 rounded-2xl font-extrabold text-[13.5px] bg-red-50 text-red-600 border border-red-100">Delete</button>
+        </div>`:`
+        <div class="grid grid-cols-1 gap-2 mt-4">
+          ${p.sold?'<div class="text-center bg-[#f1ede6] rounded-2xl py-3.5 font-extrabold text-[14px] text-mara-800/50">This item is sold — check similar below</div>':`
+          <button onclick="openContact('${p.id}')" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold py-3.5 rounded-2xl text-[15px] transition flex items-center justify-center gap-2"><i class="fa-brands fa-whatsapp text-lg"></i> Contact Seller</button>
+          <div class="grid grid-cols-3 gap-2">
+            <button onclick="startChat('${p.id}')" class="bg-mara-800 hover:bg-mara-700 text-white font-bold py-3 rounded-2xl text-[13px] transition"><i class="fa-regular fa-comment-dots mr-1"></i> Message</button>
+            <button onclick="toggleFav('${p.id}');renderProductDetail('${p.id}')" class="font-bold py-3 rounded-2xl text-[13px] border transition ${fav?'bg-ember-500 border-ember-500 text-white':'bg-white border-[#e5ddd0]'}"><i class="fa-${fav?'solid':'regular'} fa-heart mr-1"></i> ${fav?'Saved':'Save'}</button>
+            <button onclick="openReport('${p.id}')" class="bg-white border border-[#e5ddd0] text-mara-800/60 font-bold py-3 rounded-2xl text-[13px] hover:text-red-600 hover:border-red-200 transition"><i class="fa-regular fa-flag mr-1"></i> Report</button>
+          </div>`}
+        </div>`}
+      </div>
+      <div class="bg-amber-50 border border-amber-200 rounded-2xl p-4 mt-4 flex gap-3 text-[12.5px] font-medium text-amber-900"><i class="fa-solid fa-shield-halved mt-0.5 text-amber-500"></i><span><b>Safety:</b> Meet at Library Square / Student Centre in daytime. Inspect, then pay via M-Pesa. <button onclick="openModal('safetyModal')" class="underline font-bold">Full guide</button></span></div>
+    </div>
+  </div>
+  ${similar.length?`<div class="mt-10"><h3 class="font-sora font-extrabold text-[20px] mb-4">Similar on campus</h3><div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5">${similar.map(productCard).join('')}</div></div>`:''}`;
+}
+function galSet(i,pid){ galleryIdx=i; const p=DB.products.find(x=>x.id===pid); $('galMain').src=p.images[i]; p.images.forEach((_,j)=>{const t=$('thumb'+j); if(t){t.classList.toggle('border-mara-800',j===i); t.classList.toggle('opacity-60',j!==i);}}); }
+function galMove(d,pid){ const p=DB.products.find(x=>x.id===pid); galleryIdx=(galleryIdx+d+p.images.length)%p.images.length; galSet(galleryIdx,pid); }
+function openLightbox(src){ $('lightboxImg').src=src; openModal('lightbox'); }
+function toggleSold(pid){ const p=DB.products.find(x=>x.id===pid); p.sold=!p.sold; saveDB(); toast(p.sold?'Marked as sold 🎉':'Re-listed! Buyers can see it'); renderProductDetail(pid); }
+function deleteProduct(pid){ if(!confirm('Delete this listing permanently?')) return; DB.products=DB.products.filter(x=>x.id!==pid); DB.favorites=DB.favorites.filter(f=>f.productId!==pid); saveDB(); toast('Listing deleted'); navigate('profile'); }
+
+/* ---------- FAVORITES ---------- */
+function toggleFav(pid){
+  const u=currentUser(); if(!u){ openModal('authModal'); switchAuth('login'); toast('Log in to save items','warn'); return; }
+  const i=DB.favorites.findIndex(f=>f.userId===u.id&&f.productId===pid);
+  if(i>=0){ DB.favorites.splice(i,1); const p=DB.products.find(x=>x.id===pid); if(p) p.likes=Math.max(0,(p.likes||1)-1); toast('Removed from saved'); }
+  else{ DB.favorites.push({userId:u.id,productId:pid}); const p=DB.products.find(x=>x.id===pid); if(p) p.likes=(p.likes||0)+1; toast('Saved to favorites ❤'); }
+  saveDB(); updateBadges();
+  if(activeView==='home') renderHome(); if(activeView==='explore') applyExplore(); if(activeView==='saved') renderSaved();
+  document.querySelectorAll('.fav-btn').forEach(()=>{});
+}
+function renderSaved(){
+  const u=currentUser();
+  if(!u){ $('savedWrap').innerHTML=`<div class="text-center py-20 max-w-md mx-auto"><div class="w-20 h-20 mx-auto rounded-3xl shuka flex items-center justify-center text-3xl mb-5 text-white"><i class="fa-regular fa-heart"></i></div><h2 class="font-sora font-extrabold text-[24px]">Log in to see saved items</h2><p class="text-mara-800/50 font-medium text-[14px] mt-1">Your bookmarked deals live here.</p><button onclick="openModal('authModal')" class="mt-5 bg-mara-800 text-white font-bold px-8 py-3 rounded-full text-[14px]">Log in / Sign up</button></div>`; return; }
+  const favs=DB.favorites.filter(f=>f.userId===u.id).map(f=>DB.products.find(p=>p.id===f.productId)).filter(Boolean);
+  $('savedWrap').innerHTML=`<h1 class="font-sora font-extrabold text-[26px] md:text-[34px] tracking-tight">Saved <span class="text-ember-500">(${favs.length})</span></h1><p class="text-mara-800/50 font-medium text-[14px]">Your shortlist — act fast, hot items sell out.</p>
+  ${favs.length?`<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-5 mt-6">${favs.map(productCard).join('')}</div>`:`<div class="text-center py-16"><div class="text-5xl mb-4">🤍</div><h3 class="font-sora font-bold text-lg">Nothing saved yet</h3><p class="text-mara-800/50 text-[14px] font-medium">Tap the heart on any product to shortlist it.</p><button onclick="navigate('explore')" class="mt-5 bg-ember-500 text-white font-bold px-8 py-3 rounded-full text-[14px]">Explore market</button></div>`}`;
+}
+
+/* ---------- CONTACT / REPORT ---------- */
+let reportPid=null;
+function openContact(pid){
+  const u=currentUser(); if(!u){ openModal('authModal'); switchAuth('login'); toast('Log in to contact seller','warn'); return; }
+  const p=DB.products.find(x=>x.id===pid), s=sellerOf(p);
+  $('contactBody').innerHTML=`
+    <div class="flex items-center justify-between mb-4"><h3 class="font-sora font-extrabold text-[18px]">Contact seller</h3><button onclick="closeModal('contactModal')" class="w-9 h-9 rounded-full bg-[#f1ede6] flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button></div>
+    <div class="flex items-center gap-3 bg-[#f6f2ea] rounded-2xl p-3 mb-4"><img src="${p.images[0]}" class="w-14 h-14 rounded-xl object-cover"/><div class="min-w-0"><div class="font-bold text-[13.5px] truncate">${esc(p.title)}</div><div class="font-sora font-extrabold text-mara-700">${fmtK(p.price)}</div></div></div>
+    <div class="flex items-center gap-3 mb-4"><img src="${s.avatar}" class="w-12 h-12 rounded-full object-cover"/><div><div class="font-bold text-[14.5px] flex items-center gap-1.5">${esc(s.name)} ${s.verified?verifiedBadge():''}</div><div class="text-[12px] text-mara-800/50 font-semibold">${esc(s.hostel)} · 0${String(s.phone).slice(3,6)} *** *** <button onclick="this.previousSibling.textContent='';this.parentElement.innerHTML='${s.phone}'" class="text-mara-700 font-bold underline ml-1">reveal</button></div></div></div>
+    <a target="_blank" href="${waLink(s.phone, `Hi ${s.name.split(' ')[0]}! I'm from MARA MARKET (MMU). Is "${p.title}" (${fmtK(p.price)}) still available?`)}" class="w-full bg-[#25D366] hover:brightness-95 text-white font-extrabold py-3.5 rounded-2xl text-[15px] flex items-center justify-center gap-2 transition"><i class="fa-brands fa-whatsapp text-xl"></i> Chat on WhatsApp</a>
+    <button onclick="closeModal('contactModal');startChat('${p.id}')" class="w-full mt-2 bg-mara-800 text-white font-bold py-3.5 rounded-2xl text-[14px]"><i class="fa-regular fa-comment-dots mr-2"></i>Message in-app instead</button>
+    <p class="text-[11.5px] text-mara-800/45 font-semibold text-center mt-3">Mention <b>Mara Market</b> · Meet on campus · Pay after inspecting</p>`;
+  openModal('contactModal');
+}
+function openReport(pid){ const u=currentUser(); if(!u){ openModal('authModal'); return; } reportPid=pid;
+  $('reportReasons').innerHTML=['Scam / fraud','Fake or stolen item','Wrong price / bait','Sold but still listed','Harassment','Other'].map((r,i)=>`<label class="flex items-center gap-3 bg-[#f6f2ea] rounded-2xl px-4 py-3 cursor-pointer text-[13.5px] font-bold has-[:checked]:bg-red-50 has-[:checked]:border-red-200 border border-transparent"><input type="radio" name="repR" value="${r}" ${i===0?'checked':''} class="accent-red-600"/> ${r}</label>`).join('');
+  openModal('reportModal');
+}
+function submitReport(){ const r=document.querySelector('input[name=repR]:checked').value; const me=currentUser(); DB.reports.push({id:'r'+Date.now(), productId:reportPid, reporterId:me.id, reason:r, note:$('reportNote').value, status:'open', createdAt:Date.now()}); saveDB(); closeModal('reportModal'); $('reportNote').value=''; toast('Report sent. Asante for keeping campus safe!'); }
+
+/* ---------- SELLER PROFILE ---------- */
+function renderSeller(id){
+  const s=DB.users.find(u=>u.id===id)||DB.users[0]; currentSellerId=s.id;
+  const listings=DB.products.filter(p=>p.sellerId===s.id);
+  const active=listings.filter(p=>!p.sold), sold=listings.filter(p=>p.sold);
+  const biz=DB.businesses.find(b=>b.ownerId===s.id);
+  const me=currentUser(), isMe=me&&me.id===s.id;
+  const totalViews=listings.reduce((a,p)=>a+(p.views||0),0);
+  $('sellerWrap').innerHTML=`
+  <button onclick="history.length?navigate('explore'):navigate('home')" class="flex items-center gap-2 text-[13px] font-bold text-mara-800/60 hover:text-mara-800 mb-4"><span class="w-8 h-8 rounded-full bg-white border border-[#ece6da] flex items-center justify-center"><i class="fa-solid fa-arrow-left"></i></span> Back</button>
+  <div class="rounded-[28px] overflow-hidden shuka grain relative">
+    <div class="hero-blob w-[280px] h-[280px] bg-ember-500 -top-20 -right-10"></div>
+    <div class="relative z-10 p-6 md:p-8 flex flex-col md:flex-row md:items-center gap-5">
+      <img src="${s.avatar}" class="w-24 h-24 md:w-28 md:h-28 rounded-[24px] object-cover border-4 border-white shadow-pop" onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(s.name)}&background=fff&color=0b3b2e'"/>
+      <div class="flex-1">
+        <div class="flex items-center gap-2 flex-wrap"><h1 class="font-sora font-extrabold text-white text-[24px] md:text-[30px]">${esc(s.name)}</h1>${s.verified?`<span class="bg-emerald-400 text-mara-950 text-[11px] font-extrabold px-3 py-1 rounded-full flex items-center gap-1"><i class="fa-solid fa-check"></i> MMU VERIFIED</span>`:`<span class="bg-white/15 text-white/80 text-[11px] font-bold px-3 py-1 rounded-full">Pending verification</span>`}${s.role==='admin'?'<span class="bg-gold-400 text-mara-950 text-[11px] font-extrabold px-3 py-1 rounded-full">ADMIN</span>':''}</div>
+        <p class="text-white/65 text-[13.5px] font-medium mt-1 max-w-xl">${esc(s.bio||'MMU student seller.')}</p>
+        <div class="flex flex-wrap items-center gap-x-4 gap-y-1 mt-2.5 text-[12.5px] font-bold text-white/80"><span>⭐ ${s.rating} (${s.reviews})</span><span>📍 ${esc(s.hostel)}</span><span>🎓 Joined ${new Date(s.joined).getFullYear()}</span><span>📦 ${active.length} active</span></div>
+      </div>
+      <div class="flex md:flex-col gap-2 shrink-0">
+        ${isMe?`<button onclick="navigate('profile')" class="bg-white text-mara-800 font-extrabold px-6 py-3 rounded-full text-[13.5px]">Edit profile</button>`:`<button onclick="quickChat('${s.id}')" class="bg-emerald-500 hover:bg-emerald-400 text-white font-extrabold px-6 py-3 rounded-full text-[13.5px] transition flex items-center gap-2"><i class="fa-brands fa-whatsapp"></i> WhatsApp</button><button onclick="quickChat('${s.id}',true)" class="bg-white/15 border border-white/25 text-white font-bold px-6 py-3 rounded-full text-[13.5px] hover:bg-white/25 transition">Message</button>`}
+      </div>
+    </div>
+    <div class="relative z-10 grid grid-cols-4 border-t border-white/10 bg-black/20 backdrop-blur text-center">
+      ${[[active.length,'Active'],[sold.length,'Sold'],[(totalViews/1000).toFixed(1)+'k','Views'],[s.rating+'★','Rating']].map(x=>`<div class="py-3.5"><div class="font-sora font-extrabold text-white text-[18px]">${x[0]}</div><div class="text-white/50 text-[11px] font-bold uppercase tracking-wide">${x[1]}</div></div>`).join('')}
+    </div>
+  </div>
+  ${biz?`<div class="mt-4 bg-white rounded-3xl border border-[#ece6da] shadow-card p-5 flex flex-col sm:flex-row gap-4 items-start sm:items-center"><img src="${biz.cover}" class="w-full sm:w-32 h-24 rounded-2xl object-cover"/><div class="flex-1"><div class="text-[11px] font-extrabold text-ember-500 tracking-widest">STUDENT BUSINESS</div><div class="font-sora font-bold text-[17px]">${esc(biz.name)}</div><div class="text-[13px] text-mara-800/55 font-medium">${esc(biz.description)}</div></div><button onclick="toggleFollow('${biz.id}')" class="bg-mara-800 text-white font-bold px-6 py-2.5 rounded-full text-[13px]">${DB.follows.includes(biz.id)?'Following ✓':'Follow'}</button></div>`:''}
+  <div class="flex items-center gap-2 mt-8 mb-4"><h2 class="font-sora font-extrabold text-[20px]">Listings by ${esc(s.name.split(' ')[0])}</h2><span class="bg-mara-800 text-white text-[11px] font-extrabold px-2.5 py-1 rounded-full">${listings.length}</span></div>
+  ${listings.length?`<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-5">${listings.map(productCard).join('')}</div>`:`<div class="text-center py-12 bg-white rounded-3xl border border-dashed border-[#e5ddd0]"><div class="text-4xl mb-2">📦</div><p class="font-bold">No listings yet</p></div>`}
+  <div class="mt-8 bg-white rounded-3xl border border-[#ece6da] p-5 md:p-6"><h3 class="font-sora font-extrabold text-[17px] mb-4">Reviews (${s.reviews})</h3><div class="grid md:grid-cols-3 gap-3">${[['Wanjiku A.','Bought the denim jacket — exactly as pictured. Met at Library Square, super smooth! ⭐⭐⭐⭐⭐','2d ago'],['Otieno K.','iPhone was legit, battery health true. Trusted seller kabisa.','1w ago'],['Achieng N.','Pilau Fridays never disappoint. Hot & fresh every time!','3d ago']].map(r=>`<div class="bg-[#faf6ef] rounded-2xl p-4"><div class="font-bold text-[13.5px]">${r[0]}</div><p class="text-[12.5px] text-mara-800/65 font-medium mt-1">${r[1]}</p><div class="text-[11px] font-bold text-mara-800/35 mt-2">${r[2]} · Verified purchase</div></div>`).join('')}</div></div>`;
+}
+function quickChat(sellerId, inapp=false){ const s=DB.users.find(u=>u.id===sellerId); if(inapp){ const p=DB.products.find(x=>x.sellerId===sellerId); if(p) startChat(p.id); else { DB.messages.push({id:'m'+Date.now(), fromId:currentUser().id, toId:sellerId, productId:null, body:'Hi! I found you on Mara Market.', createdAt:Date.now()}); saveDB(); navigate('messages'); } } else window.open(waLink(s.phone,`Hi ${s.name.split(' ')[0]}! I'm from MARA MARKET (MMU). I have a question about your listing.`),'_blank'); }
+
+/* ---------- MESSAGES ---------- */
+function conversations(){ const me=currentUser(); if(!me) return []; const map={};
+  DB.messages.filter(m=>m.fromId===me.id||m.toId===me.id).forEach(m=>{ const other=m.fromId===me.id?m.toId:m.fromId; const key=other+'|'+(m.productId||'x'); if(!map[key]) map[key]={otherId:other, productId:m.productId, msgs:[]}; map[key].msgs.push(m); });
+  return Object.values(map).map(c=>{ c.msgs.sort((a,b)=>a.createdAt-b.createdAt); c.last=c.msgs[c.msgs.length-1]; return c; }).sort((a,b)=>b.last.createdAt-a.last.createdAt);
+}
+function startChat(pid){ const u=currentUser(); if(!u){ openModal('authModal'); return; } const p=DB.products.find(x=>x.id===pid); if(u.id===p.sellerId){ toast('This is your own listing','warn'); return; }
+  const existing=DB.messages.find(m=>m.productId===pid&&((m.fromId===u.id&&m.toId===p.sellerId)||(m.fromId===p.sellerId&&m.toId===u.id)));
+  if(!existing) DB.messages.push({id:'m'+Date.now(), fromId:u.id, toId:p.sellerId, productId:pid, body:`Hi ${sellerOf(p).name.split(' ')[0]}! Is "${p.title}" still available?`, createdAt:Date.now()});
+  saveDB(); activeChat={otherId:p.sellerId, productId:pid}; navigate('messages');
+}
+function renderMessages(){
+  const me=currentUser();
+  if(!me){ $('messagesWrap').innerHTML=`<div class="text-center py-20 max-w-md mx-auto"><div class="w-20 h-20 mx-auto rounded-3xl bg-mara-800 text-white flex items-center justify-center text-3xl mb-5"><i class="fa-regular fa-comment-dots"></i></div><h2 class="font-sora font-extrabold text-[24px]">Your chats live here</h2><p class="text-mara-800/50 text-[14px] font-medium">Log in to message sellers.</p><button onclick="openModal('authModal')" class="mt-5 bg-mara-800 text-white font-bold px-8 py-3 rounded-full text-[14px]">Log in</button></div>`; return; }
+  const convos=conversations();
+  if(!activeChat&&convos.length) activeChat={otherId:convos[0].otherId, productId:convos[0].productId};
+  const active=activeChat?convos.find(c=>c.otherId===activeChat.otherId&&c.productId===activeChat.productId):null;
+  const otherU=active?DB.users.find(u=>u.id===active.otherId):null;
+  const prod=active&&active.productId?DB.products.find(p=>p.id===active.productId):null;
+  $('messagesWrap').innerHTML=`
+  <div class="flex items-center justify-between mb-4"><div><h1 class="font-sora font-extrabold text-[24px] md:text-[30px] tracking-tight">Messages</h1><p class="text-mara-800/50 text-[13px] font-medium">MVP: in-app chat + WhatsApp handoff</p></div><span class="text-[12px] font-bold bg-mara-50 text-mara-700 px-3.5 py-2 rounded-full">${convos.length} chats</span></div>
+  <div class="grid md:grid-cols-[320px_1fr] gap-4 items-start">
+    <div class="bg-white rounded-3xl border border-[#ece6da] shadow-card overflow-hidden ${active&&window.innerWidth<768?'hidden':''}">
+      ${convos.length?convos.map(c=>{ const ou=DB.users.find(u=>u.id===c.otherId); const pp=c.productId?DB.products.find(p=>p.id===c.productId):null; const sel=active&&active.otherId===c.otherId&&active.productId===c.productId;
+        return `<button onclick="activeChat={otherId:'${c.otherId}',productId:${c.productId?`'${c.productId}'`:'null'}};renderMessages()" class="w-full flex gap-3 p-4 text-left hover:bg-[#faf6ef] transition border-b border-[#f3eee4] ${sel?'bg-mara-50/70 border-l-4 border-l-mara-800':''}">
+        <div class="relative shrink-0"><img src="${ou.avatar}" class="w-12 h-12 rounded-full object-cover"/><span class="absolute bottom-0 right-0 w-3.5 h-3.5 bg-emerald-500 border-2 border-white rounded-full"></span></div>
+        <div class="flex-1 min-w-0"><div class="flex items-center gap-1.5"><span class="font-bold text-[13.5px] truncate">${esc(ou.name)}</span>${ou.verified?verifiedBadge():''}<span class="ml-auto text-[10.5px] font-bold text-mara-800/35 shrink-0">${timeAgo(c.last.createdAt)}</span></div>
+        <div class="text-[12px] font-semibold text-ember-600 truncate">${pp?'Re: '+esc(pp.title.slice(0,32)):''}</div>
+        <div class="text-[12.5px] text-mara-800/55 font-medium truncate">${esc(c.last.body)}</div></div></button>`;}).join(''):`<div class="p-10 text-center"><div class="text-4xl mb-3">💬</div><p class="font-bold text-[14px]">No chats yet</p><p class="text-[12.5px] text-mara-800/50 font-medium">Open a product → Message</p><button onclick="navigate('explore')" class="mt-4 bg-mara-800 text-white text-[12.5px] font-bold px-6 py-2.5 rounded-full">Browse</button></div>`}
+    </div>
+    <div class="bg-white rounded-3xl border border-[#ece6da] shadow-card overflow-hidden flex flex-col ${!active?'hidden md:flex':''}" style="min-height:480px">
+      ${active?`
+      <div class="flex items-center gap-3 p-4 border-b border-[#f3eee4] bg-[#fbf8f2]">
+        <button onclick="activeChat=null;renderMessages()" class="md:hidden w-9 h-9 rounded-full bg-white border flex items-center justify-center"><i class="fa-solid fa-arrow-left text-sm"></i></button>
+        <img src="${otherU.avatar}" onclick="openSeller('${otherU.id}')" class="w-11 h-11 rounded-full object-cover cursor-pointer"/>
+        <div class="flex-1 min-w-0 cursor-pointer" onclick="openSeller('${otherU.id}')"><div class="font-bold text-[14px] flex items-center gap-1.5">${esc(otherU.name)} ${otherU.verified?verifiedBadge():''}</div><div class="text-[11.5px] font-semibold text-emerald-600">● Online · replies fast</div></div>
+        <a target="_blank" href="${waLink(otherU.phone,'Hi! Continuing our Mara Market chat here.')}" class="bg-[#25D366] text-white text-[12.5px] font-extrabold px-4 py-2.5 rounded-full flex items-center gap-1.5"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+      </div>
+      ${prod?`<div class="flex items-center gap-3 px-4 py-2.5 bg-gold-400/10 border-b border-gold-400/20 cursor-pointer" onclick="openProduct('${prod.id}')"><img src="${prod.images[0]}" class="w-10 h-10 rounded-xl object-cover"/><div class="min-w-0 flex-1"><div class="text-[12.5px] font-bold truncate">${esc(prod.title)}</div><div class="text-[12px] font-sora font-extrabold text-mara-700">${fmtK(prod.price)}</div></div><span class="text-[11px] font-bold text-mara-700 underline">View</span></div>`:''}
+      <div id="chatScroll" class="flex-1 p-4 space-y-2.5 overflow-y-auto bg-[#faf6ef]" style="max-height:380px">
+        <div class="text-center"><span class="text-[11px] font-bold bg-white border px-3 py-1.5 rounded-full text-mara-800/50">🔒 Meet on campus · Pay after inspecting · Never share PIN</span></div>
+        ${active.msgs.map(m=>{ const mine=m.fromId===me.id; return `<div class="flex ${mine?'justify-end':'justify-start'}"><div class="${mine?'chat-bubble-me':'chat-bubble-them'} px-4 py-2.5 max-w-[78%] text-[13.5px] font-medium leading-relaxed shadow-sm">${esc(m.body)}<div class="text-[10px] font-bold mt-1 ${mine?'text-white/60':'text-mara-800/35'} text-right">${new Date(m.createdAt).toLocaleTimeString('en-KE',{hour:'2-digit',minute:'2-digit'})}</div></div></div>`;}).join('')}
+      </div>
+      <div class="p-3 border-t border-[#f3eee4] flex gap-2 bg-white">
+        <input id="chatInput" onkeyup="if(event.key==='Enter') sendChat()" placeholder="Type a message..." class="flex-1 bg-[#f6f2ea] rounded-full px-5 py-3 text-[13.5px] font-medium border border-transparent"/>
+        <button onclick="sendChat()" class="w-12 h-12 rounded-full bg-mara-800 text-white flex items-center justify-center hover:bg-mara-700 transition shrink-0"><i class="fa-solid fa-paper-plane"></i></button>
+      </div>`
+      :`<div class="flex-1 flex flex-col items-center justify-center p-12 text-center"><div class="text-5xl mb-4">👈</div><h3 class="font-sora font-bold">Select a conversation</h3><p class="text-[13px] text-mara-800/50 font-medium">Pick a chat to keep negotiating, comrade.</p></div>`}
+    </div>
+  </div>`;
+  const sc=$('chatScroll'); if(sc) sc.scrollTop=sc.scrollHeight;
+}
+function sendChat(){ const v=$('chatInput').value.trim(); if(!v||!activeChat) return; const me=currentUser(); DB.messages.push({id:'m'+Date.now(), fromId:me.id, toId:activeChat.otherId, productId:activeChat.productId, body:v, createdAt:Date.now()}); saveDB(); renderMessages();
+  setTimeout(()=>{ const replies=['Sawa! Still available. When can we meet?','Poa! Price ni slightly negotiable ukichukua leo.','Niko Library Square saa kumi. Come with exact change via M-Pesa 😊']; const ou=DB.users.find(u=>u.id===activeChat.otherId); DB.messages.push({id:'m'+Date.now()+1, fromId:activeChat.otherId, toId:me.id, productId:activeChat.productId, body:replies[Math.floor(Math.random()*replies.length)], createdAt:Date.now()}); saveDB(); if(activeView==='messages') renderMessages(); updateBadges(); },1400);
+}
+
+/* ---------- SELL (multi-step) ---------- */
+const PRESET_IMGS=['https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600&q=80&auto=format&fit=crop','https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&q=80&auto=format&fit=crop','https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&q=80&auto=format&fit=crop','https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=600&q=80&auto=format&fit=crop','https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=600&q=80&auto=format&fit=crop','https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=600&q=80&auto=format&fit=crop'];
+function renderSell(){
+  const me=currentUser(); if(!me){ $('sellWrap').innerHTML=`<div class="text-center py-16"><h2 class="font-sora font-extrabold text-[24px]">Log in to sell</h2><button onclick="openModal('authModal')" class="mt-4 bg-ember-500 text-white font-bold px-8 py-3 rounded-full">Continue</button></div>`; return; }
+  const s=sellDraft.step;
+  $('sellWrap').innerHTML=`
+  <div class="text-center mb-6"><div class="text-ember-500 font-bold text-[12px] tracking-[.22em]">SELL ON MARA MARKET</div><h1 class="font-sora font-extrabold text-[26px] md:text-[34px] tracking-tight">List in 3 quick steps</h1></div>
+  <div class="flex items-center justify-center gap-2 mb-7">${[1,2,3].map(i=>`<div class="flex items-center gap-2">${`<div class="step-dot w-9 h-9 rounded-full flex items-center justify-center font-sora font-extrabold text-[14px] ${s>=i?'bg-mara-800 text-white':'bg-[#ece6da] text-mara-800/40'}">${i}</div><span class="text-[12px] font-extrabold ${s>=i?'text-mara-800':'text-mara-800/35'} hidden sm:block">${['Details','Photos & Price','Review'][i-1]}</span>`}${i<3?'<div class="w-8 sm:w-14 h-[3px] rounded-full '+(s>i?'bg-mara-800':'bg-[#ece6da]')+'"></div>':''}</div>`).join('')}</div>
+  <div class="bg-white rounded-[28px] border border-[#ece6da] shadow-card p-5 md:p-8">
+  ${s===1?`
+    <h2 class="font-sora font-extrabold text-[19px] mb-1">What are you selling?</h2><p class="text-[13px] text-mara-800/50 font-medium mb-5">Be specific — “Nike AF1 Size 43” beats “Shoes”.</p>
+    <label class="text-[12.5px] font-extrabold">TITLE *</label><input id="sTitle" value="${esc(sellDraft.title||'')}" maxlength="70" placeholder="e.g. Macbook charger + HP laptop stand" class="mt-1.5 w-full bg-[#f6f2ea] rounded-2xl px-4 py-3.5 text-[14px] font-semibold border border-transparent mb-4"/>
+    <label class="text-[12.5px] font-extrabold">CATEGORY * <span class="font-medium text-mara-800/40">(easy to edit later in code)</span></label>
+    <div class="grid grid-cols-3 sm:grid-cols-4 gap-2 mt-2 mb-4">${CATEGORIES.map(c=>`<button onclick="sellDraft.category='${c.id}';renderSell()" class="rounded-2xl border-[2px] p-2.5 text-center transition ${sellDraft.category===c.id?'border-mara-800 bg-mara-50':'border-[#f0e9db] bg-[#fbf8f2]'}"><div class="text-[22px]">${c.icon}</div><div class="text-[11px] font-extrabold mt-0.5">${c.name}</div></button>`).join('')}</div>
+    <label class="text-[12.5px] font-extrabold">CONDITION *</label>
+    <div class="flex flex-wrap gap-2 mt-2 mb-4">${CONDS.map(c=>`<button onclick="sellDraft.condition='${c}';renderSell()" class="chip text-[13px] font-bold px-5 py-2.5 rounded-full border-[2px] ${sellDraft.condition===c?'active border-mara-800':'border-[#ece6da] bg-[#fbf8f2]'}">${c}</button>`).join('')}</div>
+    <label class="text-[12.5px] font-extrabold">DESCRIPTION *</label><textarea id="sDesc" placeholder="Condition, size, reason for selling, defects, what's included..." class="mt-1.5 w-full bg-[#f6f2ea] rounded-2xl px-4 py-3.5 text-[14px] font-medium border border-transparent h-28 resize-none">${esc(sellDraft.desc||'')}</textarea>
+    <button onclick="sellNext1()" class="mt-5 w-full bg-mara-800 text-white font-extrabold py-4 rounded-2xl">Continue → Photos & Price</button>`
+  :s===2?`
+    <h2 class="font-sora font-extrabold text-[19px] mb-1">Photos, price & meet-up</h2><p class="text-[13px] text-mara-800/50 font-medium mb-5">Good photos sell 3× faster. First photo = cover.</p>
+    <label class="text-[12.5px] font-extrabold">PHOTOS (${sellDraft.images.length}/5)</label>
+    <div class="grid grid-cols-3 gap-2.5 mt-2 mb-3">${sellDraft.images.map((im,i)=>`<div class="relative rounded-2xl overflow-hidden aspect-square group"><img src="${im}" class="w-full h-full object-cover"/>${i===0?'<span class="absolute top-1.5 left-1.5 bg-mara-800 text-white text-[9.5px] font-extrabold px-2 py-0.5 rounded-full">COVER</span>':''}<button onclick="sellDraft.images.splice(${i},1);renderSell()" class="absolute top-1.5 right-1.5 w-7 h-7 bg-red-600 text-white rounded-full text-xs"><i class="fa-solid fa-xmark"></i></button></div>`).join('')}
+    ${sellDraft.images.length<5?`<label class="aspect-square rounded-2xl border-[2px] border-dashed border-mara-800/30 bg-mara-50 flex flex-col items-center justify-center cursor-pointer hover:border-mara-800 transition text-mara-700"><i class="fa-solid fa-camera text-xl"></i><span class="text-[11px] font-extrabold mt-1">Upload</span><input type="file" accept="image/*" class="hidden" onchange="sellUpload(this)"/></label>`:''}</div>
+    <div class="text-[12px] font-bold text-mara-800/50 mb-1">OR TAP A STOCK PHOTO:</div>
+    <div class="flex gap-2 overflow-x-auto no-scrollbar pb-1 mb-4">${PRESET_IMGS.map(u=>`<img src="${u}" onclick="sellDraft.images.push('${u}');renderSell()" class="w-16 h-16 rounded-xl object-cover cursor-pointer hover:ring-2 ring-mara-800 shrink-0"/>`).join('')}</div>
+    <div class="grid sm:grid-cols-2 gap-3 mb-4"><div><label class="text-[12.5px] font-extrabold">PRICE (KSh) *</label><input id="sPrice" type="number" value="${sellDraft.price||''}" placeholder="3500" class="mt-1.5 w-full bg-[#f6f2ea] rounded-2xl px-4 py-3.5 text-[16px] font-sora font-extrabold border border-transparent"/></div>
+    <div><label class="text-[12.5px] font-extrabold">MEET-UP SPOT *</label><select id="sLoc" class="mt-1.5 w-full bg-[#f6f2ea] rounded-2xl px-3 py-3.5 text-[14px] font-semibold border border-transparent">${LOCATIONS.map(l=>`<option ${sellDraft.loc===l?'selected':''}>${l}</option>`).join('')}</select></div></div>
+    <label class="flex items-center gap-2.5 font-bold text-[13.5px] cursor-pointer"><input type="checkbox" id="sNeg" ${sellDraft.negotiable!==false?'checked':''} class="w-5 h-5 accent-[#0b3b2e]"/> Price is negotiable</label>
+    <div class="grid grid-cols-2 gap-2.5 mt-5"><button onclick="sellDraft.step=1;renderSell()" class="py-4 rounded-2xl font-extrabold border border-[#e5ddd0]">← Back</button><button onclick="sellNext2()" class="bg-mara-800 text-white font-extrabold py-4 rounded-2xl">Review →</button></div>`
+  :`
+    <h2 class="font-sora font-extrabold text-[19px] mb-1">Review & publish 🚀</h2><p class="text-[13px] text-mara-800/50 font-medium mb-5">This is how comrades will see it.</p>
+    <div class="bg-[#faf6ef] rounded-3xl p-4 flex gap-4">
+      <img src="${sellDraft.images[0]||PRESET_IMGS[0]}" class="w-28 h-28 rounded-2xl object-cover shrink-0"/>
+      <div class="min-w-0"><div class="font-sora font-bold text-[15px] leading-snug">${esc(sellDraft.title)}</div><div class="font-sora font-extrabold text-mara-700 text-[20px] mt-1">${fmtK(sellDraft.price||0)}</div><div class="text-[12px] font-bold text-mara-800/50 mt-0.5">${catById(sellDraft.category||'other').name} · ${esc(sellDraft.condition||'Used')} · ${esc(sellDraft.loc||'')}</div></div>
+    </div>
+    <p class="text-[13px] text-mara-800/60 font-medium mt-4 leading-relaxed">${esc(sellDraft.desc)}</p>
+    <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-4 mt-4 text-[12.5px] font-semibold text-emerald-800 flex gap-2.5"><i class="fa-solid fa-check mt-0.5"></i> By publishing you confirm this item is yours, photos are real, and you'll meet safely on campus.</div>
+    <div class="grid grid-cols-2 gap-2.5 mt-5"><button onclick="sellDraft.step=2;renderSell()" class="py-4 rounded-2xl font-extrabold border border-[#e5ddd0]">← Edit</button><button onclick="publishListing()" class="bg-gradient-to-r from-ember-500 to-ember-600 text-white font-extrabold py-4 rounded-2xl shadow">Publish 🎉</button></div>`}
+  </div>`;
+}
+function sellNext1(){ const t=$('sTitle').value.trim(), d=$('sDesc').value.trim(); if(t.length<5) return toast('Give a clearer title (5+ chars)','warn'); if(!sellDraft.category) return toast('Pick a category','warn'); if(!sellDraft.condition) sellDraft.condition='Used'; if(d.length<10) return toast('Add a better description (10+ chars)','warn'); sellDraft.title=t; sellDraft.desc=d; sellDraft.step=2; renderSell(); window.scrollTo({top:0,behavior:'smooth'}); }
+function sellNext2(){ const pr=Number($('sPrice').value); if(!pr||pr<10) return toast('Enter a realistic price in KSh','warn'); if(!sellDraft.images.length) return toast('Add at least 1 photo','warn'); sellDraft.price=pr; sellDraft.loc=$('sLoc').value; sellDraft.negotiable=$('sNeg').checked; sellDraft.step=3; renderSell(); window.scrollTo({top:0,behavior:'smooth'}); }
+function sellUpload(input){ const f=input.files[0]; if(!f) return; const r=new FileReader(); r.onload=e=>{ sellDraft.images.push(e.target.result); renderSell(); }; r.readAsDataURL(f); }
+function publishListing(){ const me=currentUser(); const p={id:'p'+Date.now(), title:sellDraft.title, price:sellDraft.price, category:sellDraft.category||'other', condition:sellDraft.condition||'Used', sellerId:me.id, location:sellDraft.loc||me.hostel, images:sellDraft.images.length?sellDraft.images:[PRESET_IMGS[0]], description:sellDraft.desc, negotiable:sellDraft.negotiable!==false, sold:false, featured:false, views:1, likes:0, createdAt:Date.now()}; DB.products.unshift(p); saveDB(); sellDraft={step:1,images:[]}; toast('Live! Your item is on the market 🎉'); openProduct(p.id); }
+
+/* ---------- PROFILE ---------- */
+function renderProfile(){
+  const me=currentUser(); if(!me){ navigate('home'); openModal('authModal'); return; }
+  const mine=DB.products.filter(p=>p.sellerId===me.id);
+  const favs=DB.favorites.filter(f=>f.userId===me.id).length;
+  const myChats=conversations().length;
+  let tab=window._ptab||'listings';
+  $('profileWrap').innerHTML=`
+  <div class="bg-white rounded-[28px] border border-[#ece6da] shadow-card p-6 md:p-8 flex flex-col md:flex-row gap-6 items-start">
+    <div class="relative"><img src="${me.avatar}" class="w-24 h-24 rounded-[24px] object-cover"/><span class="absolute -bottom-2 -right-2 ${me.verified?'bg-emerald-500':'bg-amber-400'} text-white w-8 h-8 rounded-full flex items-center justify-center border-[3px] border-white"><i class="fa-solid fa-${me.verified?'check':'clock'} text-xs"></i></span></div>
+    <div class="flex-1 min-w-0"><div class="flex items-center gap-2 flex-wrap"><h1 class="font-sora font-extrabold text-[24px]">${esc(me.name)}</h1>${me.verified?verifiedBadge(false):'<span class="text-[11px] font-extrabold bg-amber-100 text-amber-700 px-3 py-1 rounded-full">VERIFY EMAIL</span>'}${me.role==='admin'?'<span class="text-[11px] font-extrabold bg-mara-800 text-white px-3 py-1 rounded-full">ADMIN</span>':''}</div>
+    <div class="text-[13px] font-semibold text-mara-800/50">${esc(me.email)} · 0${String(me.phone).slice(3)||me.phone} · 📍 ${esc(me.hostel)}</div>
+    <p class="text-[13.5px] text-mara-800/60 font-medium mt-2 max-w-lg">${esc(me.bio||'MMU student hustler.')}</p>
+    <div class="flex gap-2 mt-4 flex-wrap"><button onclick="editProfile()" class="bg-mara-800 text-white text-[13px] font-bold px-5 py-2.5 rounded-full">Edit profile</button><button onclick="openSeller('${me.id}')" class="border border-[#e5ddd0] text-[13px] font-bold px-5 py-2.5 rounded-full">View storefront</button>${me.role==='admin'?`<button onclick="navigate('admin')" class="bg-gold-400 text-mara-900 text-[13px] font-extrabold px-5 py-2.5 rounded-full">Admin panel</button>`:''}<button onclick="doLogout()" class="text-[13px] font-bold px-5 py-2.5 rounded-full text-red-600 bg-red-50">Log out</button></div></div>
+    <div class="grid grid-cols-3 gap-3 w-full md:w-auto">${[[mine.filter(p=>!p.sold).length,'Active'],[favs,'Saved'],[myChats,'Chats']].map(x=>`<div class="bg-[#faf6ef] rounded-2xl px-6 py-4 text-center"><div class="font-sora font-extrabold text-[22px]">${x[0]}</div><div class="text-[11px] font-bold text-mara-800/45 uppercase">${x[1]}</div></div>`).join('')}</div>
+  </div>
+  <div class="flex gap-2 mt-6 mb-4">${['listings','sold','settings'].map(t=>`<button onclick="window._ptab='${t}';renderProfile()" class="text-[13px] font-bold px-5 py-2.5 rounded-full transition ${tab===t?'bg-mara-800 text-white':'bg-white border border-[#ece6da]'}">${t==='listings'?'My listings ('+mine.length+')':t==='sold'?'Sold':'Settings'}</button>`).join('')}<button onclick="goSell()" class="ml-auto bg-ember-500 text-white text-[13px] font-bold px-5 py-2.5 rounded-full">+ New listing</button></div>
+  ${tab==='listings'? (mine.length?`<div class="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-5">${mine.map(productCard).join('')}</div>`:`<div class="text-center py-14 bg-white rounded-3xl border border-dashed"><div class="text-4xl mb-2">🚀</div><p class="font-bold">You haven't listed yet</p><button onclick="goSell()" class="mt-3 bg-mara-800 text-white text-[13px] font-bold px-6 py-2.5 rounded-full">Sell something</button></div>`)
+  :tab==='sold'?`<div class="bg-white rounded-3xl border p-6 text-[14px] font-medium">Sold items: <b>${mine.filter(p=>p.sold).length}</b> · Total earned (est.): <b class="text-mara-700">${fmtK(mine.filter(p=>p.sold).reduce((a,p)=>a+p.price,0))}</b><p class="text-mara-800/50 text-[13px] mt-1">Mark items as sold from their product page to keep the market fresh.</p></div>`
+  :`<div class="bg-white rounded-3xl border border-[#ece6da] p-6 max-w-xl"><h3 class="font-sora font-bold mb-4">Notification preferences</h3>${['New message alerts','Price drops on saved items','Weekly campus trends digest'].map((n,i)=>`<label class="flex items-center justify-between py-3 border-b border-[#f3eee4] text-[13.5px] font-bold">${n}<input type="checkbox" ${i<2?'checked':''} class="w-5 h-5 accent-[#0b3b2e]"/></label>`).join('')}<button onclick="toast('Preferences saved ✓')" class="mt-4 bg-mara-800 text-white text-[13px] font-bold px-6 py-3 rounded-full">Save</button></div>`}`;
+}
+function editProfile(){ const me=currentUser(); const name=prompt('Full name:',me.name); if(name===null) return; const phone=prompt('M-Pesa phone (254...):',me.phone); if(phone===null) return; const hostel=prompt('Hostel / area:',me.hostel); if(hostel===null) return; const bio=prompt('Short bio:',me.bio||''); if(bio===null) return;
+  me.name=name.trim()||me.name; me.phone=phone.trim()||me.phone; me.hostel=hostel.trim()||me.hostel; me.bio=bio.trim(); if(me.email.endsWith('@mmu.ac.ke')) me.verified=true; saveDB(); renderAuthAreas(); renderProfile(); toast('Profile updated ✓'); }
+
+/* ---------- BUSINESSES ---------- */
+function renderBusinesses(){
+  $('bizWrap').innerHTML=`<div class="text-center max-w-xl mx-auto"><div class="text-ember-500 font-bold text-[12px] tracking-[.22em]">STUDENT BUSINESS DIRECTORY</div><h1 class="font-sora font-extrabold text-[28px] md:text-[38px] tracking-tight">Campus hustles, <span class="text-ember-500">showcased.</span></h1><p class="text-mara-800/50 font-medium text-[14px] mt-1">From thrifts to photography — support a comrade's business today.</p>
+  <button onclick="promoteBiz()" class="mt-4 bg-mara-800 text-white font-bold px-7 py-3 rounded-full text-[14px]">+ Showcase my business</button></div>
+  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mt-8">${DB.businesses.map(b=>`<div class="bg-white rounded-3xl overflow-hidden border border-[#f0e9db] shadow-card card-hover"><div class="relative h-[150px]"><img src="${b.cover}" class="w-full h-full object-cover"/><div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div><div class="absolute bottom-3 left-4 flex items-center gap-2.5"><img src="${b.logo}" class="w-12 h-12 rounded-2xl object-cover border-2 border-white"/><div><div class="font-sora font-bold text-white text-[15px] flex items-center gap-1.5">${esc(b.name)} ${b.verified?verifiedBadge():''}</div><div class="text-white/70 text-[11.5px] font-bold">${esc(b.category)} · ⭐ ${b.rating}</div></div></div></div><div class="p-4"><p class="text-[13px] text-mara-800/60 font-medium line-clamp-2">${esc(b.description)}</p><div class="text-[12px] font-semibold text-mara-800/50 mt-2">📍 ${esc(b.location)} · 👥 ${(b.followers/1000).toFixed(1)}k followers</div><div class="flex gap-2 mt-3"><button onclick="openSeller('${b.ownerId}')" class="flex-1 bg-mara-800 text-white text-[13px] font-bold py-2.5 rounded-full">Visit shop</button><a target="_blank" href="${waLink(b.phone,'Hi! I found '+b.name+' on Mara Market.')}" class="w-11 h-11 rounded-full bg-[#25D366] text-white flex items-center justify-center"><i class="fa-brands fa-whatsapp"></i></a></div></div></div>`).join('')}</div>`;
+}
+function promoteBiz(){ const me=currentUser(); if(!me){ openModal('authModal'); return; } const n=prompt('Business name:'); if(!n) return; DB.businesses.unshift({id:'b'+Date.now(), name:n, ownerId:me.id, cover:PRESET_IMGS[0], logo:me.avatar, category:'Services', rating:5.0, followers:1, location:me.hostel, phone:me.phone, verified:me.verified, description:'New student business on Mara Market. Support a comrade!'}); saveDB(); toast('Business showcased! 🎉'); renderBusinesses(); }
+
+/* ---------- ADMIN ---------- */
+function renderAdmin(){
+  const me=currentUser();
+  if(!me||me.role!=='admin'){ $('adminWrap').innerHTML=`<div class="text-center py-20 max-w-md mx-auto"><div class="w-20 h-20 mx-auto rounded-3xl bg-mara-950 text-gold-300 flex items-center justify-center text-3xl mb-5"><i class="fa-solid fa-lock"></i></div><h2 class="font-sora font-extrabold text-[24px]">Admins only</h2><p class="text-mara-800/50 text-[14px] font-medium">Log in as <b>admin@mmu.ac.ke / mara2026</b>.</p><button onclick="openModal('authModal');fillAdmin()" class="mt-5 bg-mara-800 text-white font-bold px-8 py-3 rounded-full text-[14px]">Log in as admin</button></div>`; return; }
+  const totalUsers=DB.users.length, totalListings=DB.products.length, totalFavs=DB.favorites.length, openReports=DB.reports.filter(r=>r.status==='open').length;
+  const byCat=CATEGORIES.map(c=>({c, n:DB.products.filter(p=>p.category===c.id).length}));
+  const maxC=Math.max(...byCat.map(x=>x.n),1);
+  const tabs=[['overview','Overview'],['listings','Listings'],['users','Users'],['reports','Reports'],['database','Database']];
+  let body='';
+  if(adminTab==='overview') body=`
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">${[[totalListings,'Live listings','fa-box-open','bg-mara-800'],[totalUsers,'Students','fa-users','bg-ember-500'],[totalFavs,'Total saves','fa-heart','bg-gold-400'],[openReports,'Open reports','fa-flag','bg-red-500']].map(s=>`<div class="bg-white rounded-3xl border border-[#ece6da] shadow-card p-5"><div class="w-11 h-11 rounded-2xl ${s[3]} text-white flex items-center justify-center mb-3"><i class="fa-solid ${s[2]}"></i></div><div class="font-sora font-extrabold text-[26px]">${s[0]}</div><div class="text-[12px] font-bold text-mara-800/45 uppercase tracking-wide">${s[1]}</div></div>`).join('')}</div>
+    <div class="grid lg:grid-cols-2 gap-4 mt-4">
+      <div class="bg-white rounded-3xl border border-[#ece6da] shadow-card p-6"><h3 class="font-sora font-extrabold mb-4">Listings by category</h3>${byCat.map(x=>`<div class="flex items-center gap-3 mb-2.5"><span class="w-24 text-[12px] font-bold truncate">${x.c.icon} ${x.c.name}</span><div class="flex-1 h-2.5 bg-[#f1ede6] rounded-full overflow-hidden"><div class="h-full rounded-full bg-gradient-to-r from-mara-700 to-ember-500" style="width:${(x.n/maxC*100).toFixed(0)}%"></div></div><span class="text-[12px] font-extrabold w-6 text-right">${x.n}</span></div>`).join('')}</div>
+      <div class="bg-white rounded-3xl border border-[#ece6da] shadow-card p-6"><h3 class="font-sora font-extrabold mb-4">Recent activity</h3>${[...DB.products].sort((a,b)=>b.createdAt-a.createdAt).slice(0,5).map(p=>`<div class="flex items-center gap-3 py-2.5 border-b border-[#f3eee4]"><img src="${p.images[0]}" class="w-11 h-11 rounded-xl object-cover"/><div class="flex-1 min-w-0"><div class="text-[13px] font-bold truncate">${esc(p.title)}</div><div class="text-[11.5px] text-mara-800/45 font-semibold">${esc(sellerOf(p).name)} · ${timeAgo(p.createdAt)}</div></div><span class="font-sora font-extrabold text-[13px]">${fmtK(p.price)}</span></div>`).join('')}</div>
+    </div>`;
+  if(adminTab==='listings') body=`<div class="bg-white rounded-3xl border border-[#ece6da] shadow-card overflow-hidden"><div class="overflow-x-auto"><table class="w-full text-[13px] min-w-[720px]"><thead><tr class="bg-[#faf6ef] text-left text-[11px] uppercase tracking-wide text-mara-800/50"><th class="p-4">Product</th><th class="p-4">Seller</th><th class="p-4">Price</th><th class="p-4">Status</th><th class="p-4 text-right">Actions</th></tr></thead><tbody>${DB.products.map(p=>{const s=sellerOf(p);return `<tr class="border-t border-[#f3eee4] hover:bg-[#faf6ef]/60"><td class="p-3"><div class="flex items-center gap-3"><img src="${p.images[0]}" class="w-11 h-11 rounded-xl object-cover"/><div><div class="font-bold truncate max-w-[220px]">${esc(p.title)}</div><div class="text-[11px] text-mara-800/45 font-semibold">${catById(p.category).name} · ${p.views} views</div></div></div></td><td class="p-3 font-semibold">${esc(s.name)}</td><td class="p-3 font-sora font-extrabold">${fmtK(p.price)}</td><td class="p-3">${p.sold?'<span class="text-[11px] font-extrabold bg-ink text-white px-2.5 py-1 rounded-full">SOLD</span>':p.featured?'<span class="text-[11px] font-extrabold bg-ember-500 text-white px-2.5 py-1 rounded-full">FEATURED</span>':'<span class="text-[11px] font-extrabold bg-emerald-100 text-emerald-700 px-2.5 py-1 rounded-full">LIVE</span>'}</td><td class="p-3"><div class="flex gap-1.5 justify-end"><button onclick="adminToggleFeat('${p.id}')" title="Feature" class="w-8 h-8 rounded-full bg-gold-400/20 text-yellow-700 flex items-center justify-center"><i class="fa-solid fa-star text-xs"></i></button><button onclick="adminToggleSold('${p.id}')" title="Sold" class="w-8 h-8 rounded-full bg-mara-50 text-mara-700 flex items-center justify-center"><i class="fa-solid fa-tag text-xs"></i></button><button onclick="adminDel('${p.id}')" title="Delete" class="w-8 h-8 rounded-full bg-red-50 text-red-600 flex items-center justify-center"><i class="fa-solid fa-trash text-xs"></i></button></div></td></tr>`}).join('')}</tbody></table></div></div>`;
+  if(adminTab==='users') body=`<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-3">${DB.users.map(u=>`<div class="bg-white rounded-3xl border border-[#ece6da] shadow-card p-5 flex gap-3.5 items-start"><img src="${u.avatar}" class="w-14 h-14 rounded-2xl object-cover"/><div class="flex-1 min-w-0"><div class="font-bold text-[14.5px] flex items-center gap-1.5">${esc(u.name)} ${u.verified?verifiedBadge():''}</div><div class="text-[12px] text-mara-800/50 font-semibold truncate">${esc(u.email)}</div><div class="text-[11.5px] font-bold mt-1 ${u.role==='admin'?'text-gold-500':'text-mara-800/40'} uppercase">${u.role} · ${DB.products.filter(p=>p.sellerId===u.id).length} listings</div><div class="flex gap-1.5 mt-2.5">${u.role!=='admin'?`<button onclick="adminVerify('${u.id}')" class="text-[11.5px] font-bold px-3.5 py-1.5 rounded-full ${u.verified?'bg-[#f1ede6] text-mara-800/50':'bg-emerald-600 text-white'}">${u.verified?'Unverify':'Verify'}</button><button onclick="adminSuspend('${u.id}')" class="text-[11.5px] font-bold px-3.5 py-1.5 rounded-full bg-red-50 text-red-600">Remove</button>`:''}</div></div></div>`).join('')}</div>`;
+  if(adminTab==='reports') body=`<div class="space-y-3">${DB.reports.length?[...DB.reports].reverse().map(r=>{const p=DB.products.find(x=>x.id===r.productId);return `<div class="bg-white rounded-3xl border ${r.status==='open'?'border-red-200':'border-[#ece6da]'} shadow-card p-5 flex flex-col md:flex-row gap-4 md:items-center"><div class="flex-1"><div class="flex items-center gap-2 flex-wrap"><span class="text-[11px] font-extrabold px-2.5 py-1 rounded-full ${r.status==='open'?'bg-red-100 text-red-700':'bg-emerald-100 text-emerald-700'}">${r.status.toUpperCase()}</span><span class="font-bold text-[14px]">${esc(r.reason)}</span><span class="text-[12px] text-mara-800/40 font-semibold">· ${timeAgo(r.createdAt)}</span></div><div class="text-[13px] font-semibold mt-1">Re: <button onclick="openProduct('${r.productId}')" class="text-mara-700 underline">${p?esc(p.title):'(deleted)'}</button></div>${r.note?`<div class="text-[12.5px] text-mara-800/55 font-medium mt-1">“${esc(r.note)}”</div>`:''}</div><div class="flex gap-2 shrink-0">${r.status==='open'?`<button onclick="adminReport('${r.id}','resolved')" class="bg-mara-800 text-white text-[12px] font-bold px-4 py-2 rounded-full">Resolve</button><button onclick="adminReport('${r.id}','dismissed')" class="border text-[12px] font-bold px-4 py-2 rounded-full">Dismiss</button>`:''}</div></div>`}).join(''):'<div class="text-center py-12 bg-white rounded-3xl border">No reports. Campus is peaceful ✌️</div>'}</div>`;
+  if(adminTab==='database') body=`<div class="bg-white rounded-3xl border border-[#ece6da] shadow-card p-6"><h3 class="font-sora font-extrabold mb-1">Supabase / PostgreSQL schema</h3><p class="text-[13px] text-mara-800/55 font-medium mb-4">8 tables · RLS enabled · Storage bucket <span class="font-mono bg-[#f1ede6] px-1.5 rounded">listing-images</span>. This demo mirrors them in LocalStorage.</p><div class="grid grid-cols-2 md:grid-cols-4 gap-2.5 mb-4">${[['users',DB.users.length],['products',DB.products.length],['favorites',DB.favorites.length],['messages',DB.messages.length],['reports',DB.reports.length],['businesses',DB.businesses.length],['categories',CATEGORIES.length],['images',DB.products.reduce((a,p)=>a+p.images.length,0)]].map(t=>`<div class="bg-[#faf6ef] rounded-2xl p-3.5 text-center"><div class="font-mono font-bold text-mara-700 text-[14px]">${t[0]}</div><div class="font-sora font-extrabold text-[20px]">${t[1]}</div><div class="text-[10.5px] font-bold text-mara-800/40">ROWS</div></div>`).join('')}</div><button onclick="openModal('setupModal')" class="bg-mara-800 text-white text-[13px] font-bold px-6 py-3 rounded-full">View full SQL + Next.js setup</button> <button onclick="if(confirm('Reset demo data?')){localStorage.removeItem(LS_KEY);DB=loadDB();renderAdmin();toast('Demo reset ✓')}" class="border border-red-200 text-red-600 text-[13px] font-bold px-6 py-3 rounded-full">Reset demo</button></div>`;
+  $('adminWrap').innerHTML=`<div class="flex items-center gap-3 mb-5"><div class="w-12 h-12 rounded-2xl bg-mara-950 text-gold-300 flex items-center justify-center text-xl"><i class="fa-solid fa-gauge-high"></i></div><div><h1 class="font-sora font-extrabold text-[24px] md:text-[30px] tracking-tight leading-none">Admin Dashboard</h1><p class="text-mara-800/50 text-[13px] font-medium">Moderate listings, students & reports</p></div></div>
+  <div class="flex gap-2 overflow-x-auto no-scrollbar mb-5">${tabs.map(t=>`<button onclick="adminTab='${t[0]}';renderAdmin()" class="shrink-0 text-[13px] font-bold px-5 py-2.5 rounded-full transition ${adminTab===t[0]?'bg-mara-800 text-white':'bg-white border border-[#ece6da]'}">${t[1]} ${t[0]==='reports'&&openReports?`(${openReports})`:''}</button>`).join('')}</div>${body}`;
+}
+function adminToggleFeat(id){ const p=DB.products.find(x=>x.id===id); p.featured=!p.featured; saveDB(); renderAdmin(); toast(p.featured?'Featured on homepage ⭐':'Unfeatured'); }
+function adminToggleSold(id){ const p=DB.products.find(x=>x.id===id); p.sold=!p.sold; saveDB(); renderAdmin(); }
+function adminDel(id){ if(!confirm('Delete listing?')) return; DB.products=DB.products.filter(x=>x.id!==id); saveDB(); renderAdmin(); toast('Deleted'); }
+function adminVerify(id){ const u=DB.users.find(x=>x.id===id); u.verified=!u.verified; saveDB(); renderAdmin(); }
+function adminSuspend(id){ if(!confirm('Remove user + their listings?')) return; DB.users=DB.users.filter(x=>x.id!==id); DB.products=DB.products.filter(p=>p.sellerId!==id); saveDB(); renderAdmin(); toast('User removed','warn'); }
+function adminReport(id,st){ const r=DB.reports.find(x=>x.id===id); r.status=st; saveDB(); renderAdmin(); toast('Report '+st); }
+
+/* ---------- AUTH ---------- */
+function switchAuth(t){ ['login','signup','forgot'].forEach(x=>$('auth-'+x).classList.add('hidden')); $('auth-'+t).classList.remove('hidden'); document.querySelectorAll('#authTabs button').forEach(b=>{ const on=b.dataset.at===t; b.classList.toggle('tab-active',on); b.classList.toggle('text-mara-800/60',!on); }); }
+function fillDemo(){ switchAuth('login'); $('liEmail').value='demo@mmu.ac.ke'; $('liPass').value='demo1234'; }
+function fillAdmin(){ switchAuth('login'); $('liEmail').value='admin@mmu.ac.ke'; $('liPass').value='mara2026'; }
+function doLogin(){ const e=$('liEmail').value.trim().toLowerCase(), p=$('liPass').value; const u=DB.users.find(x=>x.email.toLowerCase()===e&&x.pass===p); if(!u) return toast('Wrong email or password','err'); setSession(u.id); closeModal('authModal'); renderAuthAreas(); toast(`Karibu back, ${u.name.split(' ')[0]}! 👋`); if(activeView==='home')renderHome(); if(u.role==='admin') navigate('admin'); else navigate('home'); updateBadges(); }
+function doSignup(){ const n=$('suName').value.trim(), e=$('suEmail').value.trim().toLowerCase(), ph=$('suPhone').value.trim(), pw=$('suPass').value, h=$('suHostel').value;
+  if(n.length<3) return toast('Enter your full name','warn'); if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(e)) return toast('Enter a valid email','warn'); if(pw.length<6) return toast('Password min 6 characters','warn'); if(DB.users.some(u=>u.email.toLowerCase()===e)) return toast('Email already registered — log in','err');
+  let digits=ph.replace(/\D/g,''); if(digits.startsWith('0')) digits='254'+digits.slice(1); if(digits.startsWith('7')) digits='254'+digits;
+  const verified=e.endsWith('@mmu.ac.ke');
+  const u={id:'u'+Date.now(), name:n, email:e, pass:pw, phone:digits||'254700000000', hostel:h, avatar:`https://ui-avatars.com/api/?name=${encodeURIComponent(n)}&background=0b3b2e&color=fff`, verified, role:'student', rating:5.0, reviews:0, joined:Date.now(), bio:'New MMU seller on Mara Market.'};
+  DB.users.push(u); saveDB(); setSession(u.id); closeModal('authModal'); renderAuthAreas(); toast(verified?'Account created — MMU verified ✓':'Account created! Verify @mmu.ac.ke for badge'); navigate('home'); updateBadges(); }
+function doForgot(){ const e=$('fpEmail').value.trim().toLowerCase(); if(!e) return toast('Enter your email','warn'); const u=DB.users.find(x=>x.email.toLowerCase()===e); const box=$('fpDone'); box.classList.remove('hidden'); box.innerHTML=u?`✓ Reset link sent to <b>${esc(e)}</b> (demo: your password is <b>${esc(u.pass)}</b> — keep it secret!)`:`No account found for <b>${esc(e)}</b>. Try signing up first.`; }
+function doLogout(){ setSession(null); renderAuthAreas(); updateBadges(); toast('Logged out. Baadaye!'); navigate('home'); }
+function renderAuthAreas(){
+  const u=currentUser();
+  $('deskAuthArea').innerHTML = u?`
+    <button onclick="navigate('saved')" class="w-10 h-10 rounded-full bg-[#f1ede6] flex items-center justify-center relative hover:bg-[#e8e0d2] transition"><i class="fa-regular fa-heart text-mara-800"></i>${DB.favorites.filter(f=>f.userId===u.id).length?`<span class="absolute -top-1 -right-1 min-w-[20px] h-5 px-1 bg-ember-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center">${DB.favorites.filter(f=>f.userId===u.id).length}</span>`:''}</button>
+    <button onclick="navigate('messages')" class="w-10 h-10 rounded-full bg-[#f1ede6] flex items-center justify-center relative hover:bg-[#e8e0d2] transition"><i class="fa-regular fa-comment-dots text-mara-800"></i>${conversations().length?`<span class="absolute -top-1 -right-1 min-w-[20px] h-5 px-1 bg-mara-600 text-white text-[10px] font-bold rounded-full flex items-center justify-center">${conversations().length}</span>`:''}</button>
+    <button onclick="goSell()" class="bg-ember-500 hover:bg-ember-600 text-white font-extrabold text-[13.5px] px-5 py-2.5 rounded-full transition flex items-center gap-2"><i class="fa-solid fa-plus text-xs"></i> Sell Something</button>
+    <button onclick="navigate('${u.role==='admin'?'admin':'profile'}')" class="flex items-center gap-2 bg-mara-800 hover:bg-mara-700 text-white pl-1.5 pr-4 py-1.5 rounded-full transition"><img src="${u.avatar}" class="w-8 h-8 rounded-full object-cover"/><span class="text-[13px] font-bold max-w-[90px] truncate">${esc(u.name.split(' ')[0])}</span></button>`
+  :`<button onclick="openModal('authModal');switchAuth('login')" class="text-[13.5px] font-bold text-mara-800 px-4 py-2.5">Log in</button><button onclick="openModal('authModal');switchAuth('signup')" class="bg-mara-800 hover:bg-mara-700 text-white font-extrabold text-[13.5px] px-5 py-2.5 rounded-full transition">Join free</button><button onclick="goSell()" class="bg-ember-500 hover:bg-ember-600 text-white font-extrabold text-[13.5px] px-5 py-2.5 rounded-full transition">+ Sell</button>`;
+  const al=$('adminLinkDesk'); if(al) al.classList.toggle('hidden', !(u&&u.role==='admin'));
+  $('mobAuthArea').innerHTML = u?`<button onclick="navigate('${u.role==='admin'?'admin':'profile'}')"><img src="${u.avatar}" class="w-9 h-9 rounded-full object-cover border-2 border-mara-800"/></button>`:`<button onclick="openModal('authModal')" class="h-9 px-4 rounded-full bg-mara-800 text-white text-[12.5px] font-extrabold">Join</button>`;
+  updateBadges();
+}
+function updateBadges(){ const u=currentUser(); const sf=u?DB.favorites.filter(f=>f.userId===u.id).length:0; const mc=u?conversations().length:0;
+  [['mobSavedCount',sf],['mobMsgCount',mc]].forEach(([id,n])=>{ const el=$(id); if(!el) return; el.textContent=n; el.classList.toggle('hidden',!n); el.classList.toggle('flex',!!n); });
+  const d1=$('mobSavedDot'), d2=$('mobMsgDot'); if(d1) d1.classList.toggle('hidden',!sf); if(d2) d2.classList.toggle('hidden',!mc);
+}
+
+/* ---------- INIT ---------- */
+document.addEventListener('DOMContentLoaded', ()=>{
+  renderAuthAreas(); renderHome();
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') ['authModal','reportModal','contactModal','safetyModal','setupModal','lightbox'].forEach(closeModal); });
+});
+</script>
+</body>
+</html>
